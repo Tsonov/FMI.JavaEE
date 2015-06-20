@@ -35,6 +35,14 @@ public class UserDao {
         query.setParameter("userName", userName);
         return queryUser(query);
     }
+    
+    public UserModel loginUser(String username, String password) {
+    	 String txtQuery = "SELECT u FROM UserModel u WHERE u.userName = :userName AND u.password=:password";
+         TypedQuery<UserModel> query = em.createQuery(txtQuery, UserModel.class);
+         query.setParameter("userName", username);
+         query.setParameter("password", password);
+         return queryUser(query);
+    }
 
     private UserModel queryUser(TypedQuery<UserModel> query) {
         try {

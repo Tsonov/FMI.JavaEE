@@ -1,0 +1,891 @@
+/* -------------------------------------------------------------- 
+  
+   common.css
+   * Project specific and overriden css rullz.
+   
+-------------------------------------------------------------- */
+body {
+	margin: 0px;
+	padding: 0px;
+	background: rgba(238, 237, 237, 0.7);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #6e6b6b;
+}
+
+.seedErrorMessageWarning {
+	width: 1200px;
+	margin: 0 auto;
+	font-size: 15px !important;
+	color: red;
+}
+
+span.ui-messages-error-summary {
+	font-size: 14px !important;
+	margin-left: 5px !important;
+	vertical-align: middle;
+}
+
+p,ol {
+	line-height: 190%;
+}
+
+/** WRAPPER */
+.mainContent {
+	width: 1200px;
+	margin: 0px auto;
+}
+
+.clearfix {
+	clear: both;
+}
+
+/** PAGE */
+#page {
+	overflow: hidden;
+	padding: 50px 0px 0px 0px;
+}
+
+.ui-widget-header {
+	background-color: #eeeded;
+	border: none;
+}
+
+.formdiv,.mainContent {
+	height: 820px;
+}
+
+.createUser {
+	height: 640px !important;
+}
+
+/** SIDEBAR */
+#sidebar {
+	margin: auto;
+	width: 350px;
+}
+
+/** FOOTER */
+.footerContainer {
+	margin-top: 90px;
+	border-top: 1px solid white;
+	overflow: hidden;
+	height: 150px;
+	background: #0f2a39;
+	padding-top: 30px;
+}
+
+.menu {
+	float: right;
+	margin-top: 27px;
+	list-style-type: none;
+}
+
+.footerText {
+	font-size: 13px;
+	color: #ABA6A6;
+}
+
+.logo2 {
+	margin-left: 15px;
+	float: right;
+}
+
+/** HEADER */
+.welcome-user {
+	color: #00b28d;
+}
+
+.wrapper {
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0px !important;
+	display: block;
+	clear: both;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: block;
+}
+
+.header {
+	min-height: 150px;
+}
+
+.header .logoDiv {
+	outline: none;
+	border: 0;
+	text-decoration: none;
+}
+
+.header .logoDiv img {
+	max-width: 100%;
+	padding-bottom: 5px;
+	outline: none;
+	border: 0;
+	text-decoration: none;
+}
+
+.header .logo1 {
+	margin: 0;
+}
+
+.header .topbar {
+	background: #6c8795;
+	min-height: 28px;
+	line-height: 26px;
+}
+
+.header .topbar .wrapper {
+	padding: 0 84px 0 81px;
+}
+
+.header .date {
+	float: right;
+	font-size: 14px;
+	color: #DAE5EC;
+	font-weight: light;
+}
+
+.header .date a {
+	color: #002437;
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.header .links a:hover {
+	background-color: #002437;
+}
+
+.header .nav {
+	background: rgba(223, 221, 221, 0.5);
+	background-size: 100% 99px;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	width: 100%;
+}
+
+.header .nav .wrapper {
+	padding: 0 84px 0 81px;
+}
+
+.header .nav .logoDiv {
+	float: left;
+	padding: 0 0 10px 0;
+	margin-top: 13px;
+}
+
+.header .nav .biggerList {
+	min-width: 915px;
+	padding: 30px 0 39px;
+	margin: 0;
+}
+
+.header .nav li {
+	float: right;
+	display: inline-block;
+	margin-left: 3px;
+}
+
+.header .nav a {
+	text-decoration: none;
+	color: #002437;
+	padding: 9px 11px 10px 14px;
+	line-height: 21px;
+	font-size: 16px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color: transparent;
+}
+
+.header .nav a:hover {
+	text-decoration: underline;
+	color: #00b28d;
+	padding: 9px 11px 10px 14px;
+	line-height: 21px;
+	font-size: 16px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color: transparent;
+}
+
+/** LOGIN */
+.loginContainer {
+	width: 310px;
+	height: 300px;
+	margin: 0px auto;
+	padding: 20px 20px 20px;
+	background: white;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px
+		rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px
+		rgba(0, 0, 0, 0.3);
+}
+
+.loginContainer h3 {
+	text-transform: uppercase;
+	margin: -20px -20px 21px;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: white;
+	text-align: center;
+	background: #002437 !important;
+	border-bottom: 1px solid #cfcfcf;
+	border-radius: 3px 3px 0 0;
+}
+
+.loginLabels {
+	color: #555555;
+	margin-bottom: 5px;
+}
+
+.loginButton {
+	text-align: center;
+}
+
+.okButton {
+	border-color: #002437 !important;
+	border-radius: 5px !important;
+	width: 225px !important;
+	height: 41px !important;
+	color: #FFFFFF !important;
+	font-size: 14px !important;
+	background: #002437 !important;
+}
+
+.okButton:FIRST-CHILD {
+	margin-right: 10px;
+}
+
+.loginInputFieldsLP {
+	background: white;
+	height: 34px !important;
+	width: 310px;
+	border: 1px solid;
+	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	border-radius: 2px;
+	outline: 5px solid #eff4f7;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/** SIGN UP */
+.signupContent {
+	width: 1200px;
+	margin: 0px auto;
+}
+
+#loginForm {
+	width: 470px;
+}
+
+.formdiv h2 {
+	padding: 0px 0px 0px 0px;
+	letter-spacing: -1px;
+	font-size: 30px;
+	color: #3B3B3B;
+}
+
+.signupLabels {
+	color: #002437;
+	float: left;
+	width: 170px;
+	margin-top: 5px;
+}
+
+.createLabels {
+	color: #002437;
+	float: left;
+	width: 160px;
+	margin-top: 5px;
+}
+
+.signupLabels2 {
+	color: #002437;
+	float: left;
+	width: 180px;
+	margin-top: 5px;
+}
+
+.signupLabels3 {
+	color: #002437;
+	float: left;
+	width: 180px;
+}
+
+.signupInputFields {
+	height: 34px !important;
+	width: 250px;
+	border-radius: 2px;
+}
+
+.signupInputFields2 {
+	height: 34px !important;
+	width: 308px;
+	border-radius: 2px;
+}
+
+.signupTextArea2 {
+	height: 100px !important;
+	width: 308px;
+	border-radius: 2px;
+}
+
+.readonly {
+	background-color: #EFFBF5 !important;
+}
+
+.signupTextArea {
+	height: 100px !important;
+	width: 308px;
+	border-radius: 2px;
+}
+
+.signupButtons {
+	width: 500px;
+	text-align: left;
+}
+
+/** Report tables**/
+#title {
+	height: 40px;
+	text-align: center;
+	font-size: 28px;
+	color: black;
+	background-color: #eeeded;
+}
+
+tbody td {
+	font-size: 17px;
+}
+
+/** chorme and safari **/
+::-webkit-input-placeholder {
+	color: #B8B8B8 !important;
+	font-weight: normal !important;
+}
+
+/** firefox **/
+::-moz-placeholder,:-moz-placeholder {
+	color: #B8B8B8 !important;
+	font-weight: normal !important;
+	opacity: 1;
+}
+
+/** IE **/
+:-ms-input-placeholder {
+	color: #B8B8B8 !important;
+	font-weight: normal !important;
+}
+
+.ui-icon-check {
+	background-position: -62px -143px;
+}
+
+.ui-dialog-titlebar {
+	background: -webkit-linear-gradient(#646763, #494b48) !important;
+	background: -o-linear-gradient(#646763, #494b48) !important;
+	background: -moz-linear-gradient(#646763, #494b48) !important;
+	background: linear-gradient(#646763, #494b48) !important;
+}
+
+.ui-selectonemenu-trigger {
+	background: -webkit-linear-gradient(#646763, #494b48) !important;
+	background: -o-linear-gradient(#646763, #494b48) !important;
+	background: -moz-linear-gradient(#646763, #494b48) !important;
+	background: linear-gradient(#646763, #494b48) !important;
+}
+
+.ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+	{
+	background: none repeat scroll 0 0 #ffffff;
+	box-shadow: 0 0 0 #8f8f8f inset;
+	color: #555555;
+}
+
+a:hover,a:focus {
+	color: #96a7af;
+	text-decoration: none;
+}
+
+/** confirm dialog **/
+.ui-confirm-dialog-severity {
+	float: left;
+	margin: 8px 7px 20px 0;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	background-image: none;
+	margin: 0;
+	padding: 0.3em 1em 0.5em 0.4em;
+	text-align: center;
+}
+
+/* BUTTONS */
+.fileinput-button {
+	border-color: #002437 !important;
+	border-radius: 5px !important;
+	width: 225px !important;
+	height: 41px !important;
+	color: #FFFFFF !important;
+	font-size: 14px !important;
+	background: #002437 !important;
+}
+
+.inputInvalid {
+   border: 2px solid red;
+}
+
+#headerContainer\:reloadConfigButton label {
+	color: #002437 !important;
+	background-color: #E8E7E7 !important;
+	border: none !important;
+	margin-top: -10px;
+	width: 130px !important;
+	height: 37px !important;
+	text-decoration: none;
+	font-size: 16px !important;
+	font-family: inherit !important;
+	font-weight: normal;
+	margin-left: 15px;
+}
+
+#headerContainer\:reloadConfigButton label:hover {
+	color: #00b28d !important;
+	text-decoration: underline !important;
+}
+
+.fileupload-buttonbar .fileinput-button .ui-icon-plusthick {
+	display: none !important;
+}
+
+.fileupload-buttonbar .fileinput-button  .ui-button-text {
+	padding-top: 9px;
+	padding-left: 1em !important;
+}
+
+.ui-fileupload {
+	margin-left: 0px;
+	width: 150px !important;
+	height: 41px !important;
+}
+
+.ui-fileupload .start {
+	display: none;
+}
+
+.ui-fileupload .cancel {
+	display: none;
+}
+
+.ui-fileupload .progress {
+	display: none;
+}
+
+.fileupload-content {
+	display: none;
+	width: 1px !important;
+	height: 1px !important;
+}
+
+.fileupload-buttonbar {
+	width: 1px !important;
+	height: 1px !important;
+}
+
+.fileupload-buttonbar {
+	padding: 0px;
+	border: none;
+}
+
+.pe-dynaform-buttonbar-bottom {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.upButton {
+	margin-left: 355px;
+}
+
+/* DROPDOWN MENU */
+.typeSelect {
+	width: 308px !important;
+	height: 34px;
+	border-radius: 2px;
+	font-size: 16px !important;
+}
+
+.typeSelect .ui-selectonemenu {
+	width: 330px !important;
+}
+
+.ui-selectonemenu-trigger {
+	background: #002437 !important;
+	border-radius: 1px;
+}
+
+.ui-icon-triangle-1-s {
+	background-image: url(../img/arrow.png) !important;
+	height: 16px;
+	width: 16px;
+	background-position: 0px 0px;
+}
+
+.typeSelect .ui-inputfield {
+	padding: 8px 4px 0px 4px;
+	border-radius: 2px;
+	color: #555555;
+	height: 26px;
+}
+
+/* PERSONS TABLE */
+.ui-paginator-rpp-options {
+	width: 70px;
+	color: 4A4A4A !important;
+	margin-top: 5px;
+	background: white !important;
+	height: 27px !important;
+	padding: 1px !important;
+}
+
+#personsGrid {
+	width: 1200px !important;
+}
+
+tbody td,.usersTable th,.usersTable .ui-paginator {
+	border-color: #000000;
+}
+
+.ui-datatable-header,.ui-sortable-column,.ui-paginator,.colType.ui-state-default
+	{
+	font-size: 14px;
+	border-color: #000000;
+	color: white;
+	background: #14384B;
+}
+
+.ui-datatable-header {
+	height: 45px;
+}
+
+.create {
+	float: right;
+	display: block;
+}
+
+.create a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.create a {
+	color: white;
+	text-decoration: none;
+}
+
+.createButton {
+	display: inline-block;
+	color: white;
+	text-align: center;
+	font-size: 15px;
+	border-color: #000000 !important;
+	border-radius: 5px;
+	width: 225px;
+	height: 41px;
+	background: #14384B;
+}
+
+.createLabel {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 14px;
+	font-weight: bold;
+	width: 150px;
+}
+
+.cancelButton {
+	background-color: #7acbf1;
+	border-color: #646763;
+	border-radius: 5px;
+	width: 225px;
+	height: 41px;
+	color: #FFFFFF;
+	font-size: 14px !important;
+	background: #6c8795;
+}
+
+#personsForm {
+	width: 1200px;
+}
+
+.buttonsUpLayout {
+	margin: 5px auto 30px auto;
+	display: inline-block;
+	width: 1200px;
+}
+
+.buttonsUpLayout {
+	margin: 20px auto 30px auto;
+	display: inline-block;
+	width: 1200px;
+}
+
+.ui-tabs-nav,.ui-panel-titlebar {
+	background: #6c8795;
+}
+
+.ui-state-active a,.ui-state-active a:link {
+	color: #14384B !important;
+}
+
+.fromDate {
+	margin-left: 3px;
+	margin-top: 5px;
+}
+
+.fromDate input {
+	width: 250px;
+	height: 34px;
+	margin-top: 5px;
+}
+
+.fromDate2 input {
+	width: 285px;
+	height: 34px;
+	margin-top: 5px;
+}
+
+.fromDate3 input {
+	width: 308px;
+	height: 34px;
+	margin-top: 5px;
+}
+
+.fromDate .ui-inputfield {
+	color: 4A4A4A;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+	font-size: 13px;
+}
+
+.media {
+	width: 670px;
+	height: 610px;
+	margin-left: 15px;
+}
+
+.ui-messages-info,.ui-message-info {
+	color: #00b28d !important;
+	background-color: #CDF7D6 !important;
+	border-color: #CDF7D6 !important;
+}
+
+/* DROPDOWN MENU */
+.has-sub a {
+	text-align: center;
+	color: black !important;
+}
+
+.has-sub a:hover {
+	color: #00b28d !important;
+}
+
+.has-sub:hover #dropdownMenu .innerList {
+	display: list-item;
+}
+
+.has-sub #dropdownMenu .innerList {
+	margin-top: 5px;
+	margin-left: -10px;
+	width: 150px !important;
+	position: absolute;
+	list-style-type: none;
+	display: none;
+}
+
+#dropdownMenu .innerList,#dropdownMenu a,#dropdownMenu li {
+	float: none;
+}
+
+#dropdownMenu .innerList li {
+	height: 35px;
+	width: 150px;
+	background: rgba(233, 231, 232, 1);
+	display: block;
+}
+
+#dropdownMenu .innerList li a {
+	padding: 10px 6px 10px 6px !important;
+	outline: none;
+	display: block;
+	position: relative;
+	color: black !important;
+	text-decoration: none;
+	text-align: center;
+}
+
+#dropdownMenu,#dropdownMenu .innerList li:hover a,#dropdownMenu .innerList li a:hover
+	{
+	color: #00b28d !important;
+}
+
+.pe-dynaform-label {
+	color: #002437 !important;
+}
+
+.upList li {
+	float: left !important;
+	list-style-type: none;
+	display: inline !important;
+}
+
+.ui-lightbox {
+	position: fixed;
+	top: 325px !important;
+	left: 46% !important;
+}
+
+.hideFilter {
+	display: none !important;
+}
+
+.filterLabel {
+	margin-left: 175px;
+}
+
+.globalFilter {
+	font-size: 16px !important;
+	width: 300px !important;
+	height: 28px !important;
+	float: right !important;
+	border: 1px solid white !important;
+}
+
+.littleTable thead th,.littleTable tbody td {
+	padding: 0px !important;
+	border: none !important;
+}
+
+.littleTable tbody th {
+	border: none !important;
+}
+
+.littleTable tbody td {
+	color: #6e6b6b !important;
+	padding-bottom: 10px !important;
+}
+
+.littleTable {
+	width: 150px;
+}
+
+.littleTable .ui-widget-content {
+	border: none !important;
+	background: none !important;
+}
+
+.createPerson h2 {
+	padding: 0px 0px 0px 0px;
+	letter-spacing: -1px;
+	font-size: 30px;
+	color: #3B3B3B;
+}
+
+.createPerson .lenderName {
+	font-size: 27px;
+}
+
+.wrapper1 {
+	width: 1200px;
+	overflow: hidden;
+}
+
+.left {
+	width: 600px !important;
+	float: left !important;
+}
+
+.right {
+	overflow: hidden;
+}
+
+.wrapper2 {
+	width: 900px;
+	overflow: hidden;
+}
+
+.leftLabel {
+	width: 150px !important;
+	float: left !important;
+}
+
+.leftLabel2 {
+	width: 120px !important;
+	float: left !important;
+}
+
+.chooseFields {
+	overflow: hidden;
+}
+
+.innerLabel {
+	width: 50px !important;
+}
+
+.purposeCheckbox tbody td {
+	padding-right: 5px;
+}
+
+.viewLoanLabels,.viewBorrowerLabels,.viewOrganizationLabels {
+	color: #002437;
+	float: left;
+	width: 210px;
+	margin-top: 5px;
+}
+
+.createLoanLabels,.createBorrowerLabels,.createOrganizationLabels {
+	color: #002437;
+	float: left;
+	width: 220px;
+	margin-top: 5px;
+}
+
+.ui-button-icon-only {
+	background: none repeat scroll 0 0 #002437 !important;
+	margin-bottom: 5px;
+	width: 25px;
+}
+
+.ui-autocomplete-input {
+	width: 290px !important;
+	height: 29px !important;
+}
+
+.booleanCheckbox .ui-chkbox-label {
+	float: right !important;
+}
+
+.colType .ui-button-icon-only {
+	margin-left: 2px;
+	margin-top: -7px;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icon-payment.png) !important;
+	background-size: 20px 20px !important;
+	background-repeat: no-repeat !important;
+}
