@@ -17,23 +17,14 @@ public class UserDao {
     private EntityManager em;
 
     public void addUser(UserModel user) {
-        user.setPassword(getHashedPassword(user.getPassword()));
         em.persist(user);
     }
 
-    public boolean validateUserCredentials(String userName, String password) {
-        String txtQuery = "SELECT u FROM User u WHERE u.userName=:userName AND u.password=:password";
-        TypedQuery<UserModel> query = em.createQuery(txtQuery, UserModel.class);
-        query.setParameter("userName", userName);
-        query.setParameter("password", getHashedPassword(password));
-        return queryUser(query) != null;
-    }
-
-    public UserModel findUserByName(String userName) {
+    public boolean findUserByName(String userName) {
         String txtQuery = "SELECT u FROM UserModel u WHERE u.userName = :userName";
         TypedQuery<UserModel> query = em.createQuery(txtQuery, UserModel.class);
         query.setParameter("userName", userName);
-        return queryUser(query);
+        return queryUser(query) != null;
     }
     
     public UserModel loginUser(String username, String password) {
