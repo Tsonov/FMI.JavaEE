@@ -1,6 +1,7 @@
 package bg.uni_sofia.conf_manager.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -21,7 +24,7 @@ public class UserModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String userName;
 
     private String password;
 
@@ -31,12 +34,13 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
-    public UserModel(String username, String password, String email) {
-        this.username = username;
+    public UserModel(String userName, String password, String email) {
+        this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
+    @Column(name="id")
     public Long getId() {
         return this.id;
     }
@@ -45,14 +49,16 @@ public class UserModel implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    @Column(name="username")
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
+    @Column(name="password")
     public String getPassword() {
         return password;
     }
@@ -61,6 +67,7 @@ public class UserModel implements Serializable {
         this.password = password;
     }
 
+    @Column(name="email")
     public String getEmail() {
         return email;
     }
@@ -72,8 +79,8 @@ public class UserModel implements Serializable {
     @Override
     public String toString() {
         String result = getClass().getSimpleName() + " ";
-        if (username != null && !username.trim().isEmpty())
-            result += "userName: " + username;
+        if (userName != null && !userName.trim().isEmpty())
+            result += "userName: " + userName;
         if (password != null && !password.trim().isEmpty())
             result += ", password: " + password;
         if (email != null && !email.trim().isEmpty())

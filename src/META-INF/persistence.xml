@@ -1,15 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="library-persistence-unit">
-    <description>Container Persistence Unit</description>
-    <jta-data-source>java:openejb/Resource/ConferenceDS</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-        <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
-        <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE" />
-        <property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=true" />
-    </properties>
-</persistence-unit>
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="CRMTarya">
+		<jta-data-source>java:/ConferenceDS</jta-data-source>
+		<properties>
+			<property name="jboss.entity.manager.jndi.name" value="java:/ConferenceDS" />
+			<property name="jboss.entity.manager.factory.jndi.name"
+				value="java:/Manager1Factory" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="true" />
+
+			<!-- comment the below in case of production deploy -->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+
+			<!-- <property name="hibernate.cache.use_query_cache" value="true" /> 
+				<property name="hibernate.cache.use_second_level_cache" value="false" /> -->
+
+			<!-- Envers configurations -->
+
+			<!-- <property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener,org.hibernate.envers.event.AuditEventListener" 
+				/> <property name="hibernate.ejb.event.post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener,org.hibernate.envers.event.AuditEventListener" 
+				/> <property name="hibernate.ejb.event.post-delete" value="org.hibernate.ejb.event.EJB3PostDeleteEventListener,org.hibernate.envers.event.AuditEventListener" 
+				/> <property name="hibernate.ejb.event.pre-collection-update" value="org.hibernate.envers.event.AuditEventListener" 
+				/> <property name="hibernate.ejb.event.pre-collection-remove" value="org.hibernate.envers.event.AuditEventListener" 
+				/> <property name="hibernate.ejb.event.post-collection-recreate" value="org.hibernate.envers.event.AuditEventListener" 
+				/> -->
+
+			<!-- <property name="org.hibernate.envers.audit_strategy" value="org.hibernate.envers.strategy.ValidityAuditStrategy"/> -->
+
+			<property name="org.hibernate.envers.versionsTableSuffix"
+				value="_V" />
+			<property name="org.hibernate.envers.revisionFieldName"
+				value="ver_rev" />
+
+		</properties>
+	</persistence-unit>
 </persistence>
