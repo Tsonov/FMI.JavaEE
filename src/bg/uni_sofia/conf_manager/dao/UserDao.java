@@ -21,14 +21,14 @@ public class UserDao {
     }
 
     public boolean findUserByName(String userName) {
-        String txtQuery = "SELECT u FROM UserModel u WHERE u.userName = :userName";
+        String txtQuery = "SELECT u FROM UserModel u WHERE u.username = :userName";
         TypedQuery<UserModel> query = em.createQuery(txtQuery, UserModel.class);
         query.setParameter("userName", userName);
         return queryUser(query) != null;
     }
     
     public UserModel loginUser(String username, String password) {
-    	 String txtQuery = "SELECT u FROM UserModel u WHERE u.userName = :userName AND u.password=:password";
+    	 String txtQuery = "SELECT u FROM UserModel u WHERE u.username = :userName AND u.password=:password";
          TypedQuery<UserModel> query = em.createQuery(txtQuery, UserModel.class);
          query.setParameter("userName", username);
          query.setParameter("password", password);

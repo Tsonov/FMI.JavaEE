@@ -63,7 +63,7 @@ public class SignupBean implements Serializable {
 		}
 
 		
-		boolean existing = userDAO.findUserByName(user.getUserName());
+		boolean existing = userDAO.findUserByName(user.getUsername());
 		if(existing) {
 //			MessageUtils.addErrorMessage("signupForm:email", "error.signup.email.exists");
 			return null;

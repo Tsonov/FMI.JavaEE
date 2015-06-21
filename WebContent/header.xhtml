@@ -24,7 +24,7 @@
 						<ui:fragment rendered="#{_loggedUser != null}">
 							<li><h:commandLink immediate="true" action="#{loginBean.logout}"
 									value="Logout" /></li>
-							<li><h:outputText value="Welcome, #{_loggedUser.userName}"
+							<li><h:outputText value="Welcome, #{_loggedUser.username}"
 									styleClass="welcome-user" /></li>
 
 						</ui:fragment>
