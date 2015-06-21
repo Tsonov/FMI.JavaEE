@@ -12,15 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import bg.uni_sofia.conf_manager.dao.UserDao;
-import bg.uni_sofia.conf_manager.entity.UserModel;
+import bg.uni_sofia.conf_manager.dao.LecturerDao;
+import bg.uni_sofia.conf_manager.entity.LecturerModel;
 //import org.apache.log4j.Logger;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 
-
-/**
- * @author gnovakov
- */
 @ManagedBean(name = "loginBean")
 @RequestScoped
 public class LoginBean implements Serializable {
@@ -31,7 +27,7 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = -404342799112068677L;
 
 	@EJB
-    private UserDao userDAO;
+    private LecturerDao lecturerDAO;
 
 
 
@@ -56,7 +52,7 @@ public class LoginBean implements Serializable {
 		}
 		
 		String cryptedPassword = GeneralUtils.encodeSha256Password(mPassword);
-		UserModel user = userDAO.loginUser(mUsername, cryptedPassword);
+		LecturerModel user = lecturerDAO.loginUser(mUsername, cryptedPassword);
 
 		if(user == null || user.getId() == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong username or password"));
