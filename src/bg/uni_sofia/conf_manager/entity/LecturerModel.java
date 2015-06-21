@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@Table(name = "USERS")
-public class UserModel implements Serializable {
+@Table(name = "LECTURERS")
+public class LecturerModel implements Serializable {
 
     private static final long serialVersionUID = -7196507424378163030L;
 
@@ -27,10 +27,10 @@ public class UserModel implements Serializable {
     private String email;
 
 
-    public UserModel() {
+    public LecturerModel() {
     }
 
-    public UserModel(String username, String password, String email) {
+    public LecturerModel(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -87,10 +87,10 @@ public class UserModel implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof UserModel)) {
+        if (!(obj instanceof LecturerModel)) {
             return false;
         }
-        UserModel other = (UserModel) obj;
+        LecturerModel other = (LecturerModel) obj;
         if (id != null) {
             if (!id.equals(other.id)) {
                 return false;

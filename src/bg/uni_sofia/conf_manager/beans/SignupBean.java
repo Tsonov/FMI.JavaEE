@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import bg.uni_sofia.conf_manager.dao.UserDao;
-import bg.uni_sofia.conf_manager.entity.UserModel;
+import bg.uni_sofia.conf_manager.dao.LecturerDao;
+import bg.uni_sofia.conf_manager.entity.LecturerModel;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 
 @ManagedBean(name="signupBean")
@@ -21,11 +21,11 @@ import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 public class SignupBean implements Serializable {
 
 	@EJB
-    private UserDao userDAO;
+    private LecturerDao lecturerDao;
 		
 	private static final long serialVersionUID = -6735226323733749234L;
 	
-	private UserModel user;
+	private LecturerModel user;
 	private String reemail;
 	private String repassword;
 	private String operationType;
@@ -33,7 +33,7 @@ public class SignupBean implements Serializable {
 	@PostConstruct
     public void init(){
 		if(user == null) {
-			user = new UserModel();
+			user = new LecturerModel();
 			
 			HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 				
@@ -63,7 +63,7 @@ public class SignupBean implements Serializable {
 		}
 
 		
-		boolean existing = userDAO.findUserByName(user.getUsername());
+		boolean existing = lecturerDao.findUserByName(user.getUsername());
 		if(existing) {
 //			MessageUtils.addErrorMessage("signupForm:email", "error.signup.email.exists");
 			return null;
@@ -77,18 +77,18 @@ public class SignupBean implements Serializable {
 		
 		req.getSession().setAttribute("_loggedUser", user);
 		
-		userDAO.addUser(user);
+		lecturerDao.addUser(user);
 		
 //		EmailUtils.sendWelcomeEmail(user.getEmail(), user.getUserNames(), getLoginUrl());
 		
 		return "home?faces-redirect=true";
 	}	
 
-	public UserModel getUser() {
+	public LecturerModel getUser() {
 		return user;
 	}
 
-	public void setUser(UserModel user) {
+	public void setUser(LecturerModel user) {
 		this.user = user;
 	}
 
