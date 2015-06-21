@@ -38,9 +38,9 @@
 							<p:outputLabel for="email" value="Email:" />
 						</h:panelGroup>
 						<p:inputText value="#{signupBean.user.email}" id="email"
-							styleClass="signupInputFields" >
-						<f:validateLength minimum="2" maximum="200" />
-						<p:watermark for="email" value="Email" />
+							styleClass="signupInputFields">
+							<f:validateLength minimum="2" maximum="200" />
+							<p:watermark for="email" value="Email" />
 						</p:inputText>
 					</h:panelGroup>
 					<br clear="all" />
@@ -52,9 +52,9 @@
 							<p:outputLabel for="reemail" value="Confirm email:" />
 						</h:panelGroup>
 						<p:inputText value="#{signupBean.reemail}" id="reemail"
-							styleClass="signupInputFields" >
-						<f:validateLength minimum="2" maximum="200" />
-						<p:watermark for="reemail" value="Confirm email" />
+							styleClass="signupInputFields">
+							<f:validateLength minimum="2" maximum="200" />
+							<p:watermark for="reemail" value="Confirm email" />
 						</p:inputText>
 					</h:panelGroup>
 					<br clear="all" />
@@ -65,10 +65,10 @@
 						<h:panelGroup layout="block" styleClass="signupLabels">
 							<p:outputLabel for="password" value="Password:" />
 						</h:panelGroup>
-						<p:inputText value="#{signupBean.user.password}" id="password"
-							required="true" styleClass="signupInputFields" >
-						<p:watermark for="password" value="Password" />
-						</p:inputText>
+						<p:password value="#{signupBean.user.password}" id="password"
+							required="true" styleClass="signupInputFields">
+							<p:watermark for="password" value="Password" />
+						</p:password>
 					</h:panelGroup>
 					<br clear="all" />
 					<hr
@@ -78,13 +78,40 @@
 						<h:panelGroup layout="block" styleClass="signupLabels">
 							<p:outputLabel for="repassword" value="Confirm password:" />
 						</h:panelGroup>
-						<p:inputText value="#{signupBean.user.password}" id="repassword"
+						<p:password value="#{signupBean.repassword}" id="repassword"
 							required="true" styleClass="signupInputFields" />
 						<p:watermark for="repassword" value="Confirm password" />
 					</h:panelGroup>
 					<br clear="all" />
 					<hr
 						style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 470px; margin: 20px 0px 0px 0px;" />
+					<br />
+					<h:panelGroup layout="block">
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="full" value="Full name:" />
+						</h:panelGroup>
+						<p:inputText value="#{signupBean.user.fullName}" id="full"
+							required="true" styleClass="signupInputFields" />
+						<p:watermark for="full" value="Full name" />
+					</h:panelGroup>
+					<br clear="all" />
+					<hr
+						style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 470px; margin: 20px 0px 0px 0px;" />
+					<br />
+					<h:panelGroup layout="block" styleClass="signupLabels">
+						<p:outputLabel for="bio" value="Biography: " />
+					</h:panelGroup>
+
+					<h:panelGroup layout="block">
+						<p:inputTextarea id="bio" value="#{signupBean.user.biography}"
+							styleClass="signupTextArea">
+							<f:validateLength minimum="0" maximum="500" />
+							<p:watermark for="bio" value="Biography" />
+						</p:inputTextarea>
+					</h:panelGroup>
+					<br clear="all" />
+					<hr
+						style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 530px; margin: 20px 0px 0px 0px;" />
 					<br />
 					<h:panelGroup layout="block" styleClass="signupButtons">
 						<p:commandButton ajax="false" action="#{signupBean.saveUser}"

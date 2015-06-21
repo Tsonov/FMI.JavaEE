@@ -14,96 +14,109 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "LECTURERS")
 public class LecturerModel implements Serializable {
 
-    private static final long serialVersionUID = -7196507424378163030L;
+	private static final long serialVersionUID = -7196507424378163030L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String username;
+	private String username;
+	private String password;
+	private String email;
+	private String fullName;
+	private String biography;
 
-    private String password;
+	public LecturerModel() {
+	}
 
-    private String email;
+	public LecturerModel(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
 
+	public Long getId() {
+		return this.id;
+	}
 
-    public LecturerModel() {
-    }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-    public LecturerModel(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public Long getId() {
-        return this.id;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getBiography() {
+		return biography;
+	}
 
-    @Override
-    public String toString() {
-        String result = getClass().getSimpleName() + " ";
-        if (username != null && !username.trim().isEmpty())
-            result += "userName: " + username;
-        if (password != null && !password.trim().isEmpty())
-            result += ", password: " + password;
-        if (email != null && !email.trim().isEmpty())
-            result += ", email: " + email;
-        return result;
-    }
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
 
-   
+	@Override
+	public String toString() {
+		String result = getClass().getSimpleName() + " ";
+		if (username != null && !username.trim().isEmpty())
+			result += "userName: " + username;
+		if (password != null && !password.trim().isEmpty())
+			result += ", password: " + password;
+		if (email != null && !email.trim().isEmpty())
+			result += ", email: " + email;
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof LecturerModel)) {
-            return false;
-        }
-        LecturerModel other = (LecturerModel) obj;
-        if (id != null) {
-            if (!id.equals(other.id)) {
-                return false;
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof LecturerModel)) {
+			return false;
+		}
+		LecturerModel other = (LecturerModel) obj;
+		if (id != null) {
+			if (!id.equals(other.id)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 }

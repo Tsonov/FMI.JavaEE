@@ -21,20 +21,20 @@ public class LecturerDao {
     }
     
     public List<LecturerModel> findAll() {
-    	String txtQuery = "SELECT u FROM UserModel u";
+    	String txtQuery = "SELECT u FROM LecturerModel u";
         TypedQuery<LecturerModel> query = em.createQuery(txtQuery, LecturerModel.class);
         return query.getResultList();
     }
 
     public boolean findUserByName(String userName) {
-        String txtQuery = "SELECT u FROM UserModel u WHERE u.username = :userName";
+        String txtQuery = "SELECT u FROM LecturerModel u WHERE u.username = :userName";
         TypedQuery<LecturerModel> query = em.createQuery(txtQuery, LecturerModel.class);
         query.setParameter("userName", userName);
         return queryUser(query) != null;
     }
     
     public LecturerModel loginUser(String username, String password) {
-    	 String txtQuery = "SELECT u FROM UserModel u WHERE u.username = :userName AND u.password=:password";
+    	 String txtQuery = "SELECT u FROM LecturerModel u WHERE u.username = :userName AND u.password=:password";
          TypedQuery<LecturerModel> query = em.createQuery(txtQuery, LecturerModel.class);
          query.setParameter("userName", username);
          query.setParameter("password", password);

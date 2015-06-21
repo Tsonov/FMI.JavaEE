@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.bouncycastle.util.encoders.Hex;
 
-import bg.uni_sofia.conf_manager.entity.UserModel;
+import bg.uni_sofia.conf_manager.entity.LecturerModel;
 
 public class GeneralUtils {
 	
@@ -26,10 +26,10 @@ public class GeneralUtils {
 		GeneralUtils.prop = prop;
 	}
 
-	public static UserModel getLoggedUser(Object request) {
+	public static LecturerModel getLoggedUser(Object request) {
 		if (request instanceof HttpServletRequest) {
 			HttpServletRequest req = (HttpServletRequest) request;
-			UserModel loggedUser = (UserModel) req.getSession().getAttribute("_loggedUser");
+			LecturerModel loggedUser = (LecturerModel) req.getSession().getAttribute("_loggedUser");
 			return loggedUser;
 		}
 		return null;
