@@ -14,45 +14,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@Table(name = "LECTURERS")
-public class LecturerModel implements Serializable {
+@Table(name = "EMPLOYEES")
+public class EmployeeModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1806553374256596061L;
 
-	private static final long serialVersionUID = -7196507424378163030L;
-
-	
 	private Long id;
 
 	private String username;
 	private String password;
 	private String email;
 	private String fullName;
-	private String biography;
-	
+
 	private UserModel user;
-
-	public LecturerModel() {
-	}
-
-	public LecturerModel(String username, String password, String email,
-			String fullName, String biography) {
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.fullName = fullName;
-		this.biography = biography;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(name="username")
+	@Column(name = "username")
 	public String getUsername() {
 		return username;
 	}
@@ -61,7 +49,7 @@ public class LecturerModel implements Serializable {
 		this.username = username;
 	}
 
-	@Column(name="password")
+	@Column(name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -70,7 +58,7 @@ public class LecturerModel implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name="email")
+	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -79,7 +67,7 @@ public class LecturerModel implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name="full_name")
+	@Column(name = "full_name")
 	public String getFullName() {
 		return fullName;
 	}
@@ -88,17 +76,7 @@ public class LecturerModel implements Serializable {
 		this.fullName = fullName;
 	}
 
-	@Column(name="biography")
-	public String getBiography() {
-		return biography;
-	}
-
-	public void setBiography(String biography) {
-		this.biography = biography;
-	}
-	
-	
-	@OneToOne(fetch=FetchType.LAZY, mappedBy="lecturer")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
 	public UserModel getUser() {
 		return user;
 	}
@@ -107,9 +85,20 @@ public class LecturerModel implements Serializable {
 		this.user = user;
 	}
 
+	public EmployeeModel(String username, String password, String email,
+			String fullName) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.fullName = fullName;
+	}
+
+	public EmployeeModel() {
+	}
+
 	@Override
     public String toString() {
-        return "Lecturers[ id=" + id + " ]";
+        return "Employees[ id=" + id + " ]";
     }
 
 	@Override
@@ -117,10 +106,10 @@ public class LecturerModel implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof LecturerModel)) {
+		if (!(obj instanceof EmployeeModel)) {
 			return false;
 		}
-		LecturerModel other = (LecturerModel) obj;
+		EmployeeModel other = (EmployeeModel) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -136,4 +125,5 @@ public class LecturerModel implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 }
