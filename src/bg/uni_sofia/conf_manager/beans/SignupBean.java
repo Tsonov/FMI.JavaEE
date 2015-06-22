@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 
 import bg.uni_sofia.conf_manager.dao.LecturerDao;
+import bg.uni_sofia.conf_manager.dao.UserDao;
 import bg.uni_sofia.conf_manager.entity.LecturerModel;
+import bg.uni_sofia.conf_manager.entity.UserModel;
+import bg.uni_sofia.conf_manager.enums.UserType;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 
 @ManagedBean(name="signupBean")
@@ -22,24 +25,27 @@ public class SignupBean implements Serializable {
 
 	@EJB
     private LecturerDao lecturerDao;
+	
+	@EJB
+	private UserDao userDAO;
 		
 	private static final long serialVersionUID = -6735226323733749234L;
 	
-	private LecturerModel user;
+	private LecturerModel lecturer;
 	private String reemail;
 	private String repassword;
 	private String operationType;
 	
 	@PostConstruct
     public void init(){
-		if(user == null) {
-			user = new LecturerModel();
+		if(lecturer == null) {
+			lecturer = new LecturerModel();
 			
 			HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 				
 			String email = (String) req.getSession().getAttribute("_identityEmail");
 			
-			user.setEmail(email);
+			lecturer.setEmail(email);
 			setReemail(email);
 		}
 
@@ -48,36 +54,45 @@ public class SignupBean implements Serializable {
 		}
     }
 	
-	public String saveUser() {
+	public String saveLecturer() {
 		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		
 		
-		if(!user.getEmail().equals(reemail)) {
+		if(!lecturer.getEmail().equals(reemail)) {
 //			MessageUtils.addErrorMessage("error.signup.email.mismatch");
 			return null;
 		}
 		
-		if(!user.getPassword().equals(repassword)) {
+		if(!lecturer.getPassword().equals(repassword)) {
 //			MessageUtils.addErrorMessage("error.signup.password.mismatch");
 			return null;
 		}
 
 		
-		boolean existing = lecturerDao.findUserByName(user.getUsername());
+		boolean existing = lecturerDao.findUserByName(lecturer.getUsername());
 		if(existing) {
 //			MessageUtils.addErrorMessage("signupForm:email", "error.signup.email.exists");
 			return null;
 		}
 		
 		
-		String plainPassword = user.getPassword();
+		String plainPassword = lecturer.getPassword();
 		String encryptedPassword = GeneralUtils.encodeSha256Password(plainPassword);
-		user.setPassword(encryptedPassword);
-		user.setEmail(user.getEmail().toLowerCase());
+		lecturer.setPassword(encryptedPassword);
+		lecturer.setEmail(lecturer.getEmail().toLowerCase());
+		
+		UserModel user = new UserModel();
+		user.setType(UserType.LECTURER);
+		user.setLecturer(lecturer);
+		user.setUsername(lecturer.getUsername());
+		user.setPassword(lecturer.getPassword());
+		
+		userDAO.addUser(user);
 		
 		req.getSession().setAttribute("_loggedUser", user);
 		
-		lecturerDao.addUser(user);
+		
+//		lecturerDao.addUser(lecturer);
 		
 //		EmailUtils.sendWelcomeEmail(user.getEmail(), user.getUserNames(), getLoginUrl());
 		
@@ -85,11 +100,11 @@ public class SignupBean implements Serializable {
 	}	
 
 	public LecturerModel getUser() {
-		return user;
+		return lecturer;
 	}
 
 	public void setUser(LecturerModel user) {
-		this.user = user;
+		this.lecturer = user;
 	}
 
 	public String getReemail() {
