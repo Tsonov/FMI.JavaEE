@@ -26,7 +26,6 @@
 									value="Logout" /></li>
 							<li><h:outputText value="Welcome, #{_loggedUser.username}"
 									styleClass="welcome-user" /></li>
-
 						</ui:fragment>
 						<ui:fragment rendered="#{_loggedUser == null}">
 						<li><a href='#{application.contextPath}/login.xhtml'>Login</a></li>

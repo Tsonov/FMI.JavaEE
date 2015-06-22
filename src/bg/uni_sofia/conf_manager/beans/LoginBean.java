@@ -1,6 +1,7 @@
 package bg.uni_sofia.conf_manager.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 
 import bg.uni_sofia.conf_manager.dao.LecturerDao;
+import bg.uni_sofia.conf_manager.dao.UserDao;
 import bg.uni_sofia.conf_manager.entity.LecturerModel;
+import bg.uni_sofia.conf_manager.entity.UserModel;
+import bg.uni_sofia.conf_manager.enums.UserType;
 //import org.apache.log4j.Logger;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 
@@ -29,6 +33,8 @@ public class LoginBean implements Serializable {
 	@EJB
     private LecturerDao lecturerDAO;
 
+	@EJB
+	private UserDao userDAO;
 
 
 	private String mUsername;
@@ -52,15 +58,23 @@ public class LoginBean implements Serializable {
 		}
 		
 		String cryptedPassword = GeneralUtils.encodeSha256Password(mPassword);
-		LecturerModel user = lecturerDAO.loginUser(mUsername, cryptedPassword);
+		UserModel user = userDAO.loginUser(mUsername, cryptedPassword);
 
 		if(user == null || user.getId() == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong username or password"));
 			return null;
 		}
 		
-		String returnUrl = "home?faces-redirect=true";
 		req.getSession().setAttribute("_loggedUser", user);
+		
+		String returnUrl = null;
+		if(user.getType().equals(UserType.ADMIN)){
+			returnUrl = "adminPage?faces-redirect=true";
+		} else if(user.getType().equals(UserType.EMPLOYEE)) {
+			returnUrl = "listAllConferences?faces-redirect=true";
+		} else if(user.getType().equals(UserType.LECTURER)) {
+			returnUrl = "listAllConferences?faces-redirect=true";
+		}
 		
 		return returnUrl;
 	}
