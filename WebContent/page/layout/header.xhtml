@@ -1,7 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:composition>
@@ -22,16 +25,18 @@
 				<div class="wrapper">
 					<ul class="biggerList">
 						<ui:fragment rendered="#{_loggedUser != null}">
-							<li><h:commandLink immediate="true" action="#{loginBean.logout}"
-									value="Logout" /></li>
+							<li><h:commandLink immediate="true"
+									action="#{loginBean.logout}" value="Logout" /></li>
 							<li><h:outputText value="Welcome, #{_loggedUser.username}"
 									styleClass="welcome-user" /></li>
+							<li><a href='#{application.contextPath}/page/listAllEmployees.xhtml'>Employees</a></li>
 						</ui:fragment>
 						<ui:fragment rendered="#{_loggedUser == null}">
-						<li><a href='#{application.contextPath}/login.xhtml'>Login</a></li>
-							<li><a href='#{application.contextPath}/signup.xhtml'>Sign Up</a></li>
-
+							<li><a href='#{application.contextPath}/page/login.xhtml'>Login</a></li>
+							<li><a href='#{application.contextPath}/page/signup.xhtml'>Sign
+									Up</a></li>
 						</ui:fragment>
+						
 					</ul>
 				</div>
 			</div>

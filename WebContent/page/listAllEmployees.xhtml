@@ -1,0 +1,87 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:exp="http://developsoft.custom.component/"
+	template="/page/layout/main.xhtml">
+
+	<ui:define name="bodyContent">
+		<div id="main-wrapper">
+			<div>
+				<h:form id="personsForm">
+					<div class="buttonsUpLayout">
+						<h:panelGroup layout="block" styleClass="create">
+							<p:commandButton ajax="false" action="/page/createEmployee.xhtml"
+								immediate="true" value="Add employee" styleClass="createButton" />
+						</h:panelGroup>
+					</div>
+
+
+					<br clear="all" />
+					<div class="usersTableStyle">
+						<br clear="all" />
+						<p:dataTable id="personsGrid" styleClass="employeeTable" var="employee"
+							value="#{listAllEmployeesBean.allEmployeesList}" paginator="true" rowsPerPageTemplate="15,20,25"
+							rows="15" sortBy="#{employee.id}" sortOrder="descending"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginatorPosition="bottom" rowKey="#{employee.id}" emptyMessage="No records"
+							filteredValue="#{listAllEmployeesBean.filtredEmployeesList}" widgetVar="personsGrid"
+							resizableColumns="true">
+
+							<f:facet name="header">
+								<h:outputText value="Employees" styleClass="filterLabel" />
+								<p:inputText id="globalFilter" onkeyup="PF('personsGrid').filter()"
+									styleClass="globalFilter">
+									<p:watermark value="Enter keyword" for="globalFilter" />
+								</p:inputText>
+							</f:facet>
+
+							<p:column sortBy="#{employee.fullName}" filterBy="#{employee.fullName}"
+								style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
+								filterMatchMode="contains">
+								<f:facet name="header">
+									<h:outputText value="Name" />
+								</f:facet>
+								<h:outputText value="#{employee.fullName}" />
+							</p:column>
+
+							<p:column sortBy="#{employee.username}" filterBy="#{employee.username}"
+								style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
+								filterMatchMode="contains">
+								<f:facet name="header">
+									<h:outputText value="Username" />
+								</f:facet>
+								<h:outputText value="#{employee.username}" />
+							</p:column>
+
+							<p:column sortBy="#{employee.email}" filterBy="#{employee.email}"
+								style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
+								filterMatchMode="contains">
+								<f:facet name="header">
+									<h:outputText value="Email" />
+								</f:facet>
+								<h:outputText value="#{employee.email}" />
+							</p:column>
+
+							<p:column style="height: 15px; font-size: 10pt;" exportable="false" styleClass="colType">
+								<f:facet name="header">
+									<h:outputText value="Actions" />
+								</f:facet>
+								<p:commandLink ajax="false" process="@this" immediate="true"
+									action="#{createEmployeeBean.editAction(employee.id)}" id="editButton">
+									<f:param name="employeeId" value="#{employee.id}" />
+									<h:graphicImage value="img/edit-icon.png" title="#{msgs.edit_button}"
+										alt="#{msgs.edit_button}" width="20px" height="20px" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+
+	</ui:define>
+
+</ui:composition>
