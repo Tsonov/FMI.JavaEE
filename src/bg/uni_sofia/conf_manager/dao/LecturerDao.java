@@ -20,6 +20,13 @@ public class LecturerDao {
         em.persist(user);
     }
     
+    public LecturerModel findById(Long id) {
+		String txtQuery = "SELECT u FROM LecturerModel u WHERE u.id = :id";
+		TypedQuery<LecturerModel> query = em.createQuery(txtQuery, LecturerModel.class);
+		query.setParameter("id", id);
+		return queryUser(query);
+	}
+    
     public List<LecturerModel> findAll() {
     	String txtQuery = "SELECT u FROM LecturerModel u";
         TypedQuery<LecturerModel> query = em.createQuery(txtQuery, LecturerModel.class);
