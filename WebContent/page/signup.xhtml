@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui" template="main.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/page/layout/main.xhtml">
 
 	<ui:define name="pageTitle">Welcome</ui:define>
 
@@ -124,7 +124,7 @@
 					<br />
 					<h:panelGroup layout="block" styleClass="span-6"
 						style="text-align: left; margin-top: 5px;">
-						<h:outputLink value="#{application.contextPath}/login.html">#{msgs.already_account_text}</h:outputLink>
+						<h:outputLink value="#{application.contextPath}/page/login.html">#{msgs.already_account_text}</h:outputLink>
 					</h:panelGroup>
 					<br clear="all" />
 					<br />

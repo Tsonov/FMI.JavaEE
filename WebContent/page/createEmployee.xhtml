@@ -1,0 +1,118 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="/page/layout/main.xhtml">
+
+
+
+	<ui:define name="bodyContent">
+		<div id="main-wrapper">
+			<div class="createPerson">
+
+				<h2>
+					<h:outputText value="Create employee" escape="false"
+						rendered="#{createEmployeeBean.operationType == 'CREATE'}" />
+					<h:outputText value="Edit employee" escape="false"
+						rendered="#{createEmployeeBean.operationType == 'UPDATE'}" />
+				</h2>
+
+				<br clear="all" />
+
+				<h:form id="signupForm">
+					<h:inputHidden value="#{createEmployeeBean.operationType}"
+						id="operationType" />
+					<h:inputHidden value="#{createEmployeeBean.employee.id}" id="id" />
+
+					<div class="loanOuterDiv">
+
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="username" value="Username: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="username"
+								value="#{createEmployeeBean.employee.username}" required="true"
+								styleClass="signupInputFields2">
+								<p:watermark for="username" value="Username" />
+								<f:validateLength maximum="45" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="password" value="Password: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:password id="password"
+								value="#{createEmployeeBean.employee.password}" required="true"
+								styleClass="signupInputFields2">
+								<p:watermark for="password" value="Password" />
+								<f:validateLength maximum="45" />
+							</p:password>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="email" value="Email: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="email"
+								value="#{createEmployeeBean.employee.email}" required="true"
+								styleClass="signupInputFields2">
+								<p:watermark for="email" value="Email" />
+								<f:validateLength maximum="45" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="fullName" value="Full name: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="fullName"
+								value="#{createEmployeeBean.employee.fullName}"
+								styleClass="signupInputFields2" required="true">
+								<p:watermark for="fullName" value="Full Name" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+					</div>
+					<h:panelGroup layout="block" styleClass="signupButtons">
+						<p:commandButton ajax="false"
+							action="#{createEmployeeBean.saveAction}"
+							rendered="#{createEmployeeBean.operationType == 'CREATE'}"
+							value="Create" styleClass="okButton" />
+						<p:commandButton ajax="false"
+							action="#{createEmployeeBean.updateAction}" value="Update"
+							styleClass="okButton"
+							rendered="#{createEmployeeBean.operationType == 'UPDATE'}">
+							<f:param name="operationType"
+								value="#{createEmployeeBean.operationType}" />
+						</p:commandButton>
+						&nbsp;&nbsp;&nbsp;
+						<p:commandButton ajax="false" action="/page/listAllEmployees?faces-redirect=true"
+							immediate="true" value="Cancel" styleClass="cancelButton">
+						</p:commandButton>
+					</h:panelGroup>
+					<br clear="all" />
+				</h:form>
+			</div>
+
+		</div>
+
+	</ui:define>
+
+</ui:composition>

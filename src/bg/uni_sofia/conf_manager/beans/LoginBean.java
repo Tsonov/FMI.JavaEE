@@ -1,7 +1,8 @@
 package bg.uni_sofia.conf_manager.beans;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -15,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import bg.uni_sofia.conf_manager.dao.LecturerDao;
 import bg.uni_sofia.conf_manager.dao.UserDao;
-import bg.uni_sofia.conf_manager.entity.LecturerModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 import bg.uni_sofia.conf_manager.enums.UserType;
 //import org.apache.log4j.Logger;
@@ -65,16 +65,22 @@ public class LoginBean implements Serializable {
 			return null;
 		}
 		
+		Set<String> permissions = new HashSet<String>();
 		req.getSession().setAttribute("_loggedUser", user);
 		
 		String returnUrl = null;
 		if(user.getType().equals(UserType.ADMIN)){
+			permissions.add("PERMISSIONS_ADMIN");
 			returnUrl = "adminPage?faces-redirect=true";
 		} else if(user.getType().equals(UserType.EMPLOYEE)) {
+			permissions.add("PERMISSIONS_EMPLOYEE");
 			returnUrl = "listAllConferences?faces-redirect=true";
 		} else if(user.getType().equals(UserType.LECTURER)) {
+			permissions.add("PERMISSIONS_LECTURER");
 			returnUrl = "listAllConferences?faces-redirect=true";
 		}
+		
+		user.setPermissions(permissions);
 		
 		return returnUrl;
 	}
@@ -88,6 +94,16 @@ public class LoginBean implements Serializable {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		
 		return null;
+	}
+	
+	public boolean isAdmin() {
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
+		boolean type = false;
+		if(loggedUser != null && loggedUser.getType().equals(UserType.ADMIN)) {
+			type = true;
+		}
+		return type;
 	}
 
 	public String getPassword() {

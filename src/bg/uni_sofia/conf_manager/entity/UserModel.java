@@ -1,6 +1,9 @@
 package bg.uni_sofia.conf_manager.entity;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang3.StringUtils;
 
 import bg.uni_sofia.conf_manager.enums.UserType;
 
@@ -37,6 +43,8 @@ public class UserModel implements Serializable {
 	private EmployeeModel employee;
 
 	private UserType type;
+	
+	private Set<String> permissions;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -106,5 +114,72 @@ public class UserModel implements Serializable {
 	public void setType(UserType type) {
 		this.type = type;
 	}
+	
+	@Transient
+	public boolean hasPermissions(String aPermissionCodes) {
+		/**
+		 * 1. Gets an "AND" group of permissions from a list of "OR" groups.
+		 * 2. If this user has all permissions in the group, returns true. Else
+		 * goes to the next "AND" group. 3. If no "AND" group matches the
+		 * requirements, returns false.
+		 */
+		if (StringUtils.isBlank(aPermissionCodes)) {
+			return true;
+		}
 
+		String semicolumnDelimiter = ";";
+		StringTokenizer orTokenizer = new StringTokenizer(aPermissionCodes,
+				semicolumnDelimiter);
+		while (orTokenizer.hasMoreTokens()) {
+			String andPermissions = orTokenizer.nextToken();
+			String commaDelimiter = ",";
+			StringTokenizer andTokenizer = new StringTokenizer(andPermissions,
+					commaDelimiter);
+			boolean andConditionMet = true;
+			while (andTokenizer.hasMoreTokens()) {
+				// strip whitespaces
+				String andPermission = andTokenizer.nextToken().trim();
+				andConditionMet = hasPermission(andPermission);
+				if (!andConditionMet) {
+					// one of the conditions is not met, skipping the remaining
+					// loop iterations
+					break;
+				}
+			}
+			if (andConditionMet) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean hasPermission(String aPermissionCode) {
+		if (StringUtils.isBlank(aPermissionCode)) {
+			return true;
+		}
+		Set<String> userRoles = getPermissions();
+
+		/*
+		 * Checks if this user has a permission that matches a specific code
+		 */
+		if (null != userRoles) {
+			Iterator<String> rolesIt = userRoles.iterator();
+			while (rolesIt.hasNext()) {
+				String code = rolesIt.next();
+				if (code.equals(aPermissionCode)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Transient
+	public Set<String> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<String> permissions) {
+		this.permissions = permissions;
+	}
 }
