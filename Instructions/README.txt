@@ -26,7 +26,7 @@
 	- In Jboss Runtime Screen in Home Directory enter where you extract jboss zip
 	- !!! Runtime JRE choose Alternate JRE and MUST BE java 7 NOT 8 and click Finish. The server is shown in Servers tab.
 	- Right click on server -> Add and Remove.. and add project to server
-	- Run server
+	- Run server 
 	
  - If everything is OK : http://localhost:8080/FMI.JavaEE/login.xhtml
  
