@@ -1,11 +1,13 @@
 package bg.uni_sofia.conf_manager.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -93,6 +95,14 @@ public class LoginBean implements Serializable {
 
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(req.getContextPath() + "/logout.jsp");
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (IOException e) {
+	//		log.error(e);
+			throw new FacesException(e);
+		}
+		
 		return null;
 	}
 	
@@ -101,6 +111,26 @@ public class LoginBean implements Serializable {
 		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
 		boolean type = false;
 		if(loggedUser != null && loggedUser.getType().equals(UserType.ADMIN)) {
+			type = true;
+		}
+		return type;
+	}
+	
+	public boolean isLecturer() {
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
+		boolean type = false;
+		if(loggedUser != null && loggedUser.getType().equals(UserType.LECTURER)) {
+			type = true;
+		}
+		return type;
+	}
+	
+	public boolean isEmployee() {
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
+		boolean type = false;
+		if(loggedUser != null && loggedUser.getType().equals(UserType.EMPLOYEE)) {
 			type = true;
 		}
 		return type;

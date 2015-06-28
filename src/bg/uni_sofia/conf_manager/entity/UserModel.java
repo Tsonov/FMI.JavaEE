@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -42,8 +43,10 @@ public class UserModel implements Serializable {
 	private LecturerModel lecturer;
 	private EmployeeModel employee;
 
+	private FileModel profilePicture;
+
 	private UserType type;
-	
+
 	private Set<String> permissions;
 
 	@Id
@@ -64,8 +67,7 @@ public class UserModel implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
+
 	@Column(name = "password")
 	public String getPassword() {
 		return password;
@@ -105,6 +107,16 @@ public class UserModel implements Serializable {
 		this.employee = employee;
 	}
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "profile_picture_id", nullable = true)
+	public FileModel getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(FileModel profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type")
 	public UserType getType() {
@@ -114,12 +126,12 @@ public class UserModel implements Serializable {
 	public void setType(UserType type) {
 		this.type = type;
 	}
-	
+
 	@Transient
 	public boolean hasPermissions(String aPermissionCodes) {
 		/**
-		 * 1. Gets an "AND" group of permissions from a list of "OR" groups.
-		 * 2. If this user has all permissions in the group, returns true. Else
+		 * 1. Gets an "AND" group of permissions from a list of "OR" groups. 2.
+		 * If this user has all permissions in the group, returns true. Else
 		 * goes to the next "AND" group. 3. If no "AND" group matches the
 		 * requirements, returns false.
 		 */

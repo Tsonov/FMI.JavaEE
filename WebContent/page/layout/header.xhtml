@@ -4,8 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
 	<h:form id="headerContainer">
@@ -27,16 +26,25 @@
 						<ui:fragment rendered="#{_loggedUser != null}">
 							<li><h:commandLink immediate="true"
 									action="#{loginBean.logout}" value="Logout" /></li>
-							<li><h:outputText value="Welcome, #{_loggedUser.username}"
+							<li><h:outputText
+									value="Welcome, #{_loggedUser.username}"
 									styleClass="welcome-user" /></li>
-							<li><a href='#{application.contextPath}/page/listAllEmployees.xhtml'>Employees</a></li>
+
+						</ui:fragment>
+						<ui:fragment rendered="#{loginBean.isAdmin()}">
+							<li><a
+								href='#{application.contextPath}/page/listAllEmployees.xhtml'>Employees</a></li>
+						</ui:fragment>
+						<ui:fragment rendered="#{loginBean.isLecturer()}">
+							<li><a
+								href='#{application.contextPath}/page/viewProfile.xhtml'>My profile</a></li>
 						</ui:fragment>
 						<ui:fragment rendered="#{_loggedUser == null}">
 							<li><a href='#{application.contextPath}/page/login.xhtml'>Login</a></li>
 							<li><a href='#{application.contextPath}/page/signup.xhtml'>Sign
 									Up</a></li>
 						</ui:fragment>
-						
+
 					</ul>
 				</div>
 			</div>
