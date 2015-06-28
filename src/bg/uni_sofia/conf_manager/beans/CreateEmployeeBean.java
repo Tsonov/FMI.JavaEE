@@ -37,22 +37,16 @@ public class CreateEmployeeBean implements Serializable {
 	private Long employeeId;
 	private EmployeeModel employee;
 	private String operationType;
-	private UserModel loggedUser;
 
 	@PostConstruct
 	public void init() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String opTypeFromRequest = req.getParameter("operationType");
 		String personIdStr = req.getParameter("employeeId");
-		
-		loggedUser = GeneralUtils.getLoggedUser(req);
-		
 
 		if (StringUtils.isBlank(personIdStr)) {
 			employeeId = (Long) req.getAttribute("employeeId");
-		} else if(loggedUser.getEmployee() != null) {
-			employeeId = loggedUser.getEmployee().getId();
-		}else {
+		} else {
 			employeeId = Long.valueOf(personIdStr);
 		}
 
@@ -83,20 +77,13 @@ public class CreateEmployeeBean implements Serializable {
 	}
 
 	protected String getSuccessRedirect() {
-		
 		if (operationType.equals("UPDATE")) {
 			MessageUtils.addFlashMessage("Employee is updated successfully!");
 		} else if (operationType.equals("CREATE")) {
 			MessageUtils.addFlashMessage("Employee is created successfully!");
 		}
 
-		String returnUrl = "";
-		if(loggedUser.getAdmin()!= null) {
-			returnUrl = "/page/listAllEmployees";
-		} else if(loggedUser.getEmployee() != null) {
-			returnUrl = "/page/viewEmployeeProfile";
-		}
-		return returnUrl;
+		return "/page/listAllEmployees";
 	}
 	
 	private boolean validate() {
@@ -128,9 +115,6 @@ public class CreateEmployeeBean implements Serializable {
 		if(!validate()) {
 			return null;
 		} else {
-			String plainPassword = employee.getPassword();
-			String encryptedPassword = GeneralUtils.encodeSha256Password(plainPassword);
-			employee.setPassword(encryptedPassword);
 			employeeDao.updateEmployee(employee);
 			return getSuccessRedirect();
 		}

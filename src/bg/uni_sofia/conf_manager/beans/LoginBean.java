@@ -22,7 +22,6 @@ import bg.uni_sofia.conf_manager.entity.UserModel;
 import bg.uni_sofia.conf_manager.enums.UserType;
 //import org.apache.log4j.Logger;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
-import bg.uni_sofia.conf_manager.utils.MessageUtils;
 
 @ManagedBean(name = "loginBean")
 @RequestScoped
@@ -64,7 +63,7 @@ public class LoginBean implements Serializable {
 		UserModel user = userDAO.loginUser(mUsername, cryptedPassword);
 
 		if(user == null || user.getId() == null) {
-			MessageUtils.addErrorMessage("Wrong username or password");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong username or password"));
 			return null;
 		}
 		

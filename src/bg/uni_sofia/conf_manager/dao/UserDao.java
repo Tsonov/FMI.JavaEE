@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import bg.uni_sofia.conf_manager.entity.FileModel;
+import bg.uni_sofia.conf_manager.entity.LecturerModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 
 @Singleton

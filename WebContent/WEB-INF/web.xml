@@ -49,15 +49,6 @@
 		<url-pattern>/page/*</url-pattern>
 	</filter-mapping>
 	
-	<filter>
-	    <filter-name>PrimeFaces FileUpload Filter</filter-name>
-	    <filter-class>bg.uni_sofia.conf_manager.filter.FileUploadFilter</filter-class>
-	</filter>
-	<filter-mapping>
-	    <filter-name>PrimeFaces FileUpload Filter</filter-name>
-	    <servlet-name>Faces Servlet</servlet-name>
-	</filter-mapping>
-	
 	<error-page>
 		<error-code>500</error-code>
 		<location>/error/error</location>

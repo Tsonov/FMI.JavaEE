@@ -39,8 +39,6 @@
 						</h:panelGroup>
 						<p:inputText value="#{signupBean.user.email}" id="email"
 							styleClass="signupInputFields">
-							<f:validateRegex 
-								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							<f:validateLength minimum="2" maximum="200" />
 							<p:watermark for="email" value="Email" />
 						</p:inputText>

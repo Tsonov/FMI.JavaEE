@@ -27,6 +27,7 @@ public class AuthenticationFilter implements Filter, Serializable {
 
 	public static final String PERMISSIONS_PROPERTIES = "/resources/permissions.properties";
 
+	@SuppressWarnings("unused")
 	private FilterConfig mFilterConfig = null;
 	private static Properties prop = new Properties();
 	

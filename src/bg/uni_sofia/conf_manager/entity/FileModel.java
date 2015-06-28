@@ -40,7 +40,7 @@ public class FileModel {
 		this.content = content;
 	}
 	
-	@Column(name = "file_name", nullable = false, length = 100)
+	@Column(name = "file_name", nullable = false, length = 200)
 	public String getFileName() {
 		return fileName;
 	}

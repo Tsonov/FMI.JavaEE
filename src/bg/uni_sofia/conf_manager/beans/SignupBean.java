@@ -18,7 +18,6 @@ import bg.uni_sofia.conf_manager.entity.LecturerModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 import bg.uni_sofia.conf_manager.enums.UserType;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
-import bg.uni_sofia.conf_manager.utils.MessageUtils;
 
 @ManagedBean(name="signupBean")
 @ViewScoped
@@ -60,19 +59,19 @@ public class SignupBean implements Serializable {
 		
 		
 		if(!lecturer.getEmail().equals(reemail)) {
-			MessageUtils.addErrorMessage("E-mails mismatch");
+//			MessageUtils.addErrorMessage("error.signup.email.mismatch");
 			return null;
 		}
 		
 		if(!lecturer.getPassword().equals(repassword)) {
-			MessageUtils.addErrorMessage("Passwords mismatch");
+//			MessageUtils.addErrorMessage("error.signup.password.mismatch");
 			return null;
 		}
 
 		
 		boolean existing = lecturerDao.findUserByName(lecturer.getUsername());
 		if(existing) {
-			MessageUtils.addErrorMessage("There is already user with this username!");
+//			MessageUtils.addErrorMessage("signupForm:email", "error.signup.email.exists");
 			return null;
 		}
 		
@@ -91,6 +90,11 @@ public class SignupBean implements Serializable {
 		userDAO.addUser(user);
 		
 		req.getSession().setAttribute("_loggedUser", user);
+		
+		
+//		lecturerDao.addUser(lecturer);
+		
+//		EmailUtils.sendWelcomeEmail(user.getEmail(), user.getUserNames(), getLoginUrl());
 		
 		return "home?faces-redirect=true";
 	}	
