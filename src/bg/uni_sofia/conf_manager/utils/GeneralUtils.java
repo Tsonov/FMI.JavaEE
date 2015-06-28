@@ -1,13 +1,20 @@
 package bg.uni_sofia.conf_manager.utils;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.util.encoders.Hex;
 
 import bg.uni_sofia.conf_manager.entity.UserModel;
@@ -47,61 +54,35 @@ public class GeneralUtils {
         }
     }
 	
-	/**
-	 * load permissions.properties file and populate all permissions
-	 * this should be used only for test purposes
-	 * 
-	 * @return
-	 */
-/*	public static Set<String> getAllPermissions() {
-		Properties prop = new Properties();
+	public static byte[] resizeProfilePicture(byte[] imageData, String fileName, Integer newWidth, Integer newHeight) {
 
-		InputStream in = AuthenticationFilter.class.getResourceAsStream(WebConstants.PERMISSIONS_PROPERTIES);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		String extension = "jpeg";
+		if (StringUtils.isNotBlank(fileName)) {
+			extension = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+		}
+
+		BufferedImage sourceImage = null;
 		try {
-			prop.load(in);
+			sourceImage = ImageIO.read(new ByteArrayInputStream(imageData));
+
+			Image thumbnail = sourceImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+			BufferedImage bufferedThumbnail = new BufferedImage(thumbnail.getWidth(null), thumbnail.getHeight(null), BufferedImage.TYPE_INT_RGB);
+
+			bufferedThumbnail.getGraphics().drawImage(thumbnail, 0, 0, null);
+			ImageIO.write(bufferedThumbnail, extension, baos);
+			return baos.toByteArray();
+
 		} catch (IOException e) {
 			e.printStackTrace();
+			return imageData;
 		} finally {
 			try {
-				if (in != null) {
-					in.close();
-				}
-			} catch (IOException ioex) {
-				ioex.printStackTrace();
+				baos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-
-		Set<String> permissions = new HashSet<String>();
-
-		for (Object key : prop.keySet()) {
-			if (key == null) {
-				continue;
-			}
-
-			String value = prop.getProperty(key.toString());
-			if (StringUtils.isNotBlank(value)) {
-				value = value.trim();
-				String[] strPermissions = null;
-
-				if (value.indexOf(";") != -1) {
-					strPermissions = value.split(";");
-				} else if (value.indexOf(",") != -1) {
-					strPermissions = value.split(",");
-				} else if (value.equals(WebConstants.PERMISSION_ALLOW_ALL)) {
-					continue;
-				}
-
-				if (strPermissions != null && strPermissions.length > 0) {
-					for (int i = 0; i < strPermissions.length; i++) {
-						permissions.add(strPermissions[i]);
-					}
-				} else {
-					permissions.add(value);
-				}
-			}
-		}
-
-		return permissions;
-	}*/
+	}
 	
 }

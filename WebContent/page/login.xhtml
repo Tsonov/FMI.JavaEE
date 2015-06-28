@@ -19,7 +19,7 @@
 
 				<h:form id="loginForm">
 					<div style="margin-left: 5px; margin-right: 5px;">
-						<p:messages autoUpdate="false" id="loginDialogMessages"
+						<p:messages autoUpdate="true" id="loginDialogMessages"
 							globalOnly="false" />
 					</div>
 					<h:panelGroup layout="block">
@@ -49,7 +49,7 @@
 					<br />
 
 					<h:panelGroup layout="block" styleClass="signupButtons">
-						<p:commandButton ajax="true" action="#{loginBean.login}"
+						<p:commandButton ajax="true" action="#{loginBean.login}" update="loginDialogMessages"
 							styleClass="okButton" value="Login" />
 					</h:panelGroup>
 				</h:form>

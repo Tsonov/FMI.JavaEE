@@ -12,15 +12,14 @@ import bg.uni_sofia.conf_manager.entity.LecturerModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 
-@ManagedBean(name = "viewProfileBean")
+@ManagedBean(name = "viewLecturerProfileBean")
 @ViewScoped
-public class ViewProfileBean {
+public class ViewLecturerProfileBean {
 
 	@EJB
 	private LecturerDao lecturerDao;
 
 	private LecturerModel lecturer;
-	private String lecturerId = null;
 
 	@PostConstruct
 	public void init() {
