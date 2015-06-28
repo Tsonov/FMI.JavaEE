@@ -17,6 +17,7 @@ import bg.uni_sofia.conf_manager.entity.EmployeeModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 import bg.uni_sofia.conf_manager.enums.UserType;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
+import bg.uni_sofia.conf_manager.utils.MessageUtils;
 
 @ManagedBean(name="createEmployeeBean")
 @ViewScoped
@@ -72,17 +73,17 @@ public class CreateEmployeeBean implements Serializable {
 
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		req.setAttribute("employeeId", entityId);
-		return "/createEmployee";
+		return "/page/createEmployee";
 	}
 
 	protected String getSuccessRedirect() {
 		if (operationType.equals("UPDATE")) {
-//			MessageUtils.addFlashMessage("edit_lender_success");
+			MessageUtils.addFlashMessage("Employee is updated successfully!");
 		} else if (operationType.equals("CREATE")) {
-//			MessageUtils.addFlashMessage("create_lender_success");
+			MessageUtils.addFlashMessage("Employee is created successfully!");
 		}
 
-		return "/listAllEmployees";
+		return "/page/listAllEmployees";
 	}
 	
 	private boolean validate() {
