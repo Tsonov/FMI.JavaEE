@@ -33,17 +33,9 @@ public class MessageUtils {
 
 
 	public static void addErrorMessage(String aMsgId) {
-		addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getMessage(aMsgId), null));
+		addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, aMsgId, null));
 	}
-
-
-	/**
-	 * Removes HTML special characters from a Text message.
-	 * 
-	 * @param aTextToClean
-	 *            a text to clean
-	 * @return the input text without any special characters
-	 */
+	
 	public static String cleanHTML(String aText) {
 		String cleanedText = aText.replace("\"", "");
 		cleanedText = cleanedText.replace("'", "");
