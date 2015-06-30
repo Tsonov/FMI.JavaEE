@@ -70,7 +70,7 @@ public class ConferenceDetailsBean {
 		if (currentUser.getLecturer() != null) {
 			return id.equals(currentUser.getLecturer().getId().toString());
 		} else {
-			throw new Exception("Invalid state, logged user should be a lecturer...");
+			return false;
 		}
 	}
 

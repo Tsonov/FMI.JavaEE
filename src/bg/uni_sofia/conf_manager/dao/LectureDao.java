@@ -40,8 +40,14 @@ public class LectureDao {
 		return query.getResultList();
 	}
 	
+	public List<LectureModel> findAllUnapproved() {
+		String txtQuery = "SELECT l FROM LectureModel l WHERE l.approved IS NULL";
+		TypedQuery<LectureModel> query = em.createQuery(txtQuery, LectureModel.class);
+		return query.getResultList();
+	}
+	
 	public List<LectureModel> findAllForConference(Long conferenceId) {
-		String txtQuery = "SELECT l FROM LectureModel l WHERE l.conference.id= :confId";
+		String txtQuery = "SELECT l FROM LectureModel l WHERE l.conference.id= :confId AND l.approved = true";
 		TypedQuery<LectureModel> query = em.createQuery(txtQuery, LectureModel.class);
 		query.setParameter("confId", conferenceId);
 		return query.getResultList();
