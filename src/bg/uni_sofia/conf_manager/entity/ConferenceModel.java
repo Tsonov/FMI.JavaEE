@@ -1,7 +1,7 @@
 package bg.uni_sofia.conf_manager.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class ConferenceModel implements Serializable {
 		this.title = title;
 	}
 
-	@Column(name="venue_address")
+	@Column(name="venue_address", length=500)
 	public String getVenueAddress() {
 		return venueAddress;
 	}

@@ -35,6 +35,10 @@
 							<li><a
 								href='#{application.contextPath}/page/listAllEmployees.xhtml'>Employees</a></li>
 						</ui:fragment>
+						<ui:fragment rendered="#{loginBean.isEmployee()}">
+							<li><a
+								href='#{application.contextPath}/page/listAllConferences.xhtml'>Conferences</a></li>
+						</ui:fragment>
 						<ui:fragment rendered="#{loginBean.isLecturer()}">
 							<li><a
 								href='#{application.contextPath}/page/viewProfile.xhtml'>My profile</a></li>

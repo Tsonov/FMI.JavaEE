@@ -1,0 +1,116 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="/page/layout/main.xhtml">
+
+
+
+	<ui:define name="bodyContent">
+		<div id="main-wrapper">
+			<div class="createPerson">
+
+				<h2>
+					<h:outputText value="Create a new conference" escape="false"
+						rendered="#{createConferenceBean.operationType == 'CREATE'}" />
+					<h:outputText value="Change this conference details" escape="false"
+						rendered="#{createConferenceBean.operationType == 'UPDATE'}" />
+				</h2>
+
+				<br clear="all" />
+
+				<h:form id="signupForm">
+					<h:inputHidden value="#{createConferenceBean.operationType}"
+						id="operationType" />
+
+					<div class="loanOuterDiv">
+
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="title" value="Title: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="title"
+								value="#{createConferenceBean.conference.title}" required="true"
+								styleClass="signupInputFields2">
+								<p:watermark for="title" value="Title" />
+								<f:validateLength maximum="100" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr class="dashedLine" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="startDate" value="Choose a start date: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:calendar 
+								id="startDate" 
+								value="#{createConferenceBean.conference.startDate}"
+								required="true">
+								
+								<p:watermark for="startDate" value="Start date" />
+							</p:calendar>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr class="dashedLine"/>
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="endDate" value="Choose an end date: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:calendar 
+								id="endDate" 
+								value="#{createConferenceBean.conference.endDate}"
+								required="true">
+								
+								<p:watermark for="endDate" value="End date" />
+							</p:calendar>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr class="dashedLine"/>
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="venueAddress" value="Where will the conference be held: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputTextarea id="venueAddress"
+								cols="50" rows="30"
+								value="#{createConferenceBean.conference.venueAddress}" required="true"
+								styleClass="signupInputFields2">
+								<f:validateLength maximum="500" />
+							</p:inputTextarea>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr class="dashedLine"/>
+						<br />
+					</div>
+					<h:panelGroup layout="block" styleClass="signupButtons">
+						<p:commandButton ajax="false"
+							action="#{createConferenceBean.saveAction}"
+							rendered="#{createConferenceBean.operationType == 'CREATE'}"
+							value="Create" styleClass="okButton" />
+						<p:commandButton ajax="false"
+							action="#{createConferenceBean.updateAction}" value="Update"
+							styleClass="okButton"
+							rendered="#{createConferenceBean.operationType == 'UPDATE'}">
+							<f:param name="operationType"
+								value="#{createConferenceBean.operationType}" />
+						</p:commandButton>
+						&nbsp;&nbsp;&nbsp;
+						<p:commandButton ajax="false" action="/page/allConferences.xhtml?faces-redirect=true"
+							immediate="true" value="Cancel" styleClass="cancelButton">
+						</p:commandButton>
+					</h:panelGroup>
+					<br clear="all" />
+				</h:form>
+			</div>
+
+		</div>
+
+	</ui:define>
+
+</ui:composition>
