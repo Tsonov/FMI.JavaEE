@@ -15,13 +15,12 @@
 		<div class="wrapper1">
 
 			<h2>
-				<h:outputText value="#{viewLecturerProfileBean.lecturer.fullName}'s Profile"
+				<h:outputText
+					value="#{viewLecturerProfileBean.lecturer.fullName}'s Profile"
 					escape="false" />
 				<h:form>
-					<p:commandButton ajax="false"
-						action="/page/editLecturerProfile.xhtml" immediate="true"
-						value="Edit" styleClass="createButton" />
-						</h:form>
+
+				</h:form>
 			</h2>
 			<br clear="all" />
 			<h:panelGroup layout="block" styleClass="signupLabels">
@@ -39,7 +38,8 @@
 				<p:outputLabel for="email" value="Email: " />
 			</h:panelGroup>
 			<h:panelGroup layout="block">
-				<h:outputText value="#{viewLecturerProfileBean.lecturer.email}" id="email" />
+				<h:outputText value="#{viewLecturerProfileBean.lecturer.email}"
+					id="email" />
 			</h:panelGroup>
 			<br clear="all" />
 			<hr
@@ -49,7 +49,8 @@
 				<p:outputLabel for="bio" value="Biography: " />
 			</h:panelGroup>
 			<h:panelGroup layout="block">
-				<h:outputText value="#{viewLecturerProfileBean.lecturer.biography}" id="bio" />
+				<h:outputText value="#{viewLecturerProfileBean.lecturer.biography}"
+					id="bio" />
 			</h:panelGroup>
 			<br clear="all" />
 			<hr
@@ -63,6 +64,10 @@
 			<h:form>
 
 				<h:panelGroup layout="block" styleClass="create">
+					<p:commandButton ajax="false"
+						action="/page/editLecturerProfile.xhtml" immediate="true"
+						value="Edit" styleClass="createButton" />
+
 					<p:commandButton ajax="false"
 						action="/page/home?faces-redirect=true" immediate="true"
 						value="Back" styleClass="cancelButton">

@@ -20,110 +20,125 @@
 
 				<br clear="all" />
 
-				<h:form id="signupForm">
+				<h:form id="signupForm" enctype="multipart/form-data">
 					<h:inputHidden value="#{editLecturerProfile.lecturer.id}" id="id" />
-
-					<div class="loanOuterDiv">
-						<div class="loanLeft">
-							<h:panelGroup layout="block" styleClass="signupLabels">
-								<p:outputLabel for="username" value="Username: " />
-							</h:panelGroup>
-							<h:panelGroup layout="block">
-								<p:inputText id="username"
-									value="#{editLecturerProfile.lecturer.username}"
-									required="true" readonly="true" styleClass="signupInputFields2">
-									<p:watermark for="username" value="Username" />
-									<f:validateLength maximum="45" />
-								</p:inputText>
-							</h:panelGroup>
-							<br clear="all" />
-							<hr
-								style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
-							<br />
-							<h:panelGroup layout="block" styleClass="signupLabels">
-								<p:outputLabel for="full" value="Full name: " />
-							</h:panelGroup>
-							<h:panelGroup layout="block">
-								<p:inputText id="full"
-									value="#{editLecturerProfile.lecturer.fullName}"
-									required="true" styleClass="signupInputFields2">
-									<p:watermark for="full" value="Full name" />
-									<f:validateLength maximum="45" />
-								</p:inputText>
-							</h:panelGroup>
-							<br clear="all" />
-							<hr
-								style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
-							<br />
-							<h:panelGroup layout="block" styleClass="signupLabels">
-								<p:outputLabel for="email" value="Email: " />
-							</h:panelGroup>
-							<h:panelGroup layout="block">
-								<p:inputText id="email"
-									value="#{editLecturerProfile.lecturer.email}" required="true"
-									styleClass="signupInputFields2">
-									<f:validateRegex
-										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-									<p:watermark for="email" value="Email" />
-									<f:validateLength maximum="45" />
-								</p:inputText>
-							</h:panelGroup>
-							<br clear="all" />
-							<hr
-								style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
-							<br />
-
-							<h:panelGroup layout="block" styleClass="signupLabels">
-								<p:outputLabel for="bio" value="Biography: " />
-							</h:panelGroup>
-							<h:panelGroup layout="block">
-								<p:inputTextarea id="bio"
-									value="#{editLecturerProfile.lecturer.biography}"
-									styleClass="signupTextArea">
-									<f:validateLength minimum="5" maximum="250" />
-									<p:watermark for="bio" value="Biography" />
-								</p:inputTextarea>
-							</h:panelGroup>
-							<br clear="all" />
-							<hr
-								style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
-							<br />
-
-							<h:panelGroup layout="block" styleClass="signupLabels">
-								<p:outputLabel for="pass" value="New password: " />
-							</h:panelGroup>
-							<h:panelGroup layout="block">
-								<p:password id="pass" value="#{editLecturerProfile.newPassword}"
-									 styleClass="signupInputFields2" />
-							</h:panelGroup>
-							<br clear="all" />
-							<hr
-								style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
-							<br />
-							<h:panelGroup layout="block" styleClass="signupLabels">
-								<p:outputLabel for="repeat" value="Confirm password: " />
-							</h:panelGroup>
-							<h:panelGroup layout="block">
-								<p:password id="repeat"
-									value="#{editLecturerProfile.repassword}"
-									styleClass="signupInputFields2" />
-							</h:panelGroup>
-							<br clear="all" />
-							<hr
-								style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
-							<br />
-
+					<div class="span-2" style="margin-top: 60px; text-align: center;">
+						<h:graphicImage styleClass="takePhotoPicture"
+							value="/img/icon_takephoto.png" border="0"
+							rendered="#{editLecturerProfile.loggedUser.profilePicture == null}" />
+						<h:graphicImage
+							value="/image.jpg?id=#{editLecturerProfile.loggedUser.profilePicture.id}&amp;type=users"
+							styleClass="avatar takePhotoPicture"
+							style="width: 48px; height: 48px;"
+							rendered="#{editLecturerProfile.loggedUser.profilePicture != null}" />
+						<div id="takePhotoDiv" style="display: none;">
+							<p:fileUpload id="logo"
+								value="#{editLecturerProfile.profilePicture}" mode="simple"
+								styleClass="span-3 fileUpload takePhotoButton"
+								allowTypes="/(\.|\/)(gif|jpe?g|png|bmp)$/" sizeLimit="10485760"
+								description="Select Image" />
 						</div>
+						<br /> <br /> <a href="javascript: void(0)" id="takePhotoLink"
+							onclick="showUploadButton();"
+							style="color: #0066cc; font-size: 14px;">Upload</a>
+					</div>
+					<div class="loanLeft">
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="username" value="Username: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="username"
+								value="#{editLecturerProfile.lecturer.username}" required="true"
+								readonly="true" styleClass="signupInputFields2">
+								<p:watermark for="username" value="Username" />
+								<f:validateLength maximum="45" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="full" value="Full name: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="full"
+								value="#{editLecturerProfile.lecturer.fullName}" required="true"
+								styleClass="signupInputFields2">
+								<p:watermark for="full" value="Full name" />
+								<f:validateLength maximum="45" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="email" value="Email: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputText id="email"
+								value="#{editLecturerProfile.lecturer.email}" required="true"
+								styleClass="signupInputFields2">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								<p:watermark for="email" value="Email" />
+								<f:validateLength maximum="45" />
+							</p:inputText>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="bio" value="Biography: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:inputTextarea id="bio"
+								value="#{editLecturerProfile.lecturer.biography}"
+								styleClass="signupTextArea">
+								<f:validateLength minimum="5" maximum="250" />
+								<p:watermark for="bio" value="Biography" />
+							</p:inputTextarea>
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="pass" value="New password: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:password id="pass" value="#{editLecturerProfile.newPassword}"
+								styleClass="signupInputFields2" />
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+						<h:panelGroup layout="block" styleClass="signupLabels">
+							<p:outputLabel for="repeat" value="Confirm password: " />
+						</h:panelGroup>
+						<h:panelGroup layout="block">
+							<p:password id="repeat" value="#{editLecturerProfile.repassword}"
+								styleClass="signupInputFields2" />
+						</h:panelGroup>
+						<br clear="all" />
+						<hr
+							style="border-top: 1px dashed #d4d4d4; border-bottom: none; width: 480px; margin: 20px 0px 0px 0px;" />
+						<br />
+
 					</div>
 					<h:panelGroup layout="block" styleClass="signupButtons">
 						<p:commandButton ajax="false"
-							action="#{editLecturerProfile.editLecturer()}" value="Edit"
+							action="#{editLecturerProfile.editLecturer}" value="Edit"
 							styleClass="okButton" />
 									&nbsp;&nbsp;&nbsp;
 						<p:commandButton ajax="false"
-							action="/page/viewProfile?faces-redirect=true"
-							immediate="true" value="Cancel"
-							 styleClass="cancelButton" />
+							action="/page/viewProfile?faces-redirect=true" immediate="true"
+							value="Cancel" styleClass="cancelButton" />
 					</h:panelGroup>
 					<br clear="all" />
 				</h:form>
@@ -131,6 +146,26 @@
 
 		</div>
 
+		<script type="text/javascript">
+			jQuery(document).ready(
+					function() {
+
+						jQuery(".interestsOptions").find('label').each(
+								function(i) {
+									var txt = jQuery(this).text();
+									addInterestIcon(txt, jQuery(this),
+											'#{application.contextPath}');
+								});
+
+					});
+
+			function showUploadButton() {
+				//jQuery("#takePhotoLink").hide(200);
+				jQuery(".takePhotoPicture").hide();
+				jQuery("#takePhotoDiv").show();
+				jQuery("#signupForm\\:logo").trigger('click');
+			}
+		</script>
 	</ui:define>
 
 </ui:composition>

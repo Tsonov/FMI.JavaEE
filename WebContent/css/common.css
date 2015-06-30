@@ -582,7 +582,7 @@ tbody td,.usersTable th,.usersTable .ui-paginator {
 }
 
 .create {
-	float: right;
+	float: left;
 	display: block;
 }
 
