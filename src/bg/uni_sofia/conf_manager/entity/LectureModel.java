@@ -21,7 +21,7 @@ public class LectureModel implements Serializable {
 	
 	private String title;
 	private String synopsis;
-	private boolean isApproved;
+	private Boolean isApproved;
 	private ConferenceModel conference = new ConferenceModel();
 	private LecturerModel lecturer = new LecturerModel();
 	
@@ -54,12 +54,12 @@ public class LectureModel implements Serializable {
 		this.synopsis = synopsis;
 	}
 	
-	@Column(name="is_approved")
-	public boolean isApproved() {
+	@Column(name="is_approved", nullable=true)
+	public Boolean getApproved() {
 		return isApproved;
 	}
 
-	public void setApproved(boolean isApproved) {
+	public void setApproved(Boolean isApproved) {
 		this.isApproved = isApproved;
 	}
 

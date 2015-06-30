@@ -23,7 +23,7 @@ public class EmployeeHomeBean {
 
 	@PostConstruct
 	public void init() {
-		List<LectureModel> lec = lectureDao.findAllWithApprovedStatusOf(false);
+		List<LectureModel> lec = lectureDao.findAllUnapproved();
 		unapprovedLectures = new ArrayList<LectureModel>();
 		for(LectureModel em : lec) {
 			unapprovedLectures.add(em);

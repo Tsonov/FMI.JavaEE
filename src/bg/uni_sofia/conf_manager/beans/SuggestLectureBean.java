@@ -50,7 +50,7 @@ public class SuggestLectureBean {
 	}
 	
 	public String saveAction() {
-		lecture.setApproved(false);
+		lecture.setApproved((Boolean)null);
 		lecture.setLecturer(currentLecturer);
 		lecture.setConference(conference);
 		lectureDao.addLecture(lecture);
