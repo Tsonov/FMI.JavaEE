@@ -36,12 +36,14 @@
 								href='#{application.contextPath}/page/listAllEmployees.xhtml'>Employees</a></li>
 						</ui:fragment>
 						<ui:fragment rendered="#{loginBean.isEmployee()}">
+						<li><a
+								href='#{application.contextPath}/page/viewEmployeeProfile.xhtml'>My profile</a></li>
 							<li><a
 								href='#{application.contextPath}/page/listAllConferences.xhtml'>Conferences</a></li>
 						</ui:fragment>
 						<ui:fragment rendered="#{loginBean.isLecturer()}">
 							<li><a
-								href='#{application.contextPath}/page/viewProfile.xhtml'>My profile</a></li>
+								href='#{application.contextPath}/page/viewLecturerProfile.xhtml'>My profile</a></li>
 						</ui:fragment>
 						<ui:fragment rendered="#{_loggedUser == null}">
 							<li><a href='#{application.contextPath}/page/login.xhtml'>Login</a></li>

@@ -67,24 +67,22 @@ public class EditLecturerProfile {
 
 			loggedUser.setLecturer(lecturer);
 			loggedUser.setPassword(newEncryptedPassword);
-			userDao.updateUser(loggedUser);
 
-		} else {
-			userDao.updateUser(loggedUser);
 		}
-		
-		
-		if(profilePicture != null && profilePicture.getContents() != null) {
+
+		if (profilePicture != null && profilePicture.getContents() != null) {
 			String imageName = profilePicture.getFileName();
-			/*if(!ValidationUtils.validateFileExtension(imageName)) {
-				MessageUtils.addErrorMessage("error_incorrect_image");
-				return null;
-			}*/
-			
-			byte[] imageContent = GeneralUtils.resizeProfilePicture(profilePicture.getContents(), imageName, 50, 50);
-			
+			/*
+			 * if(!ValidationUtils.validateFileExtension(imageName)) {
+			 * MessageUtils.addErrorMessage("error_incorrect_image"); return
+			 * null; }
+			 */
+
+			byte[] imageContent = GeneralUtils.resizeProfilePicture(
+					profilePicture.getContents(), imageName, 50, 50);
+
 			FileModel currentImage = loggedUser.getProfilePicture();
-			if(currentImage != null && currentImage.getId() != null) {
+			if (currentImage != null && currentImage.getId() != null) {
 				currentImage = userDao.getFile(currentImage.getId());
 				currentImage.setFileName(imageName);
 				currentImage.setContent(imageContent);
@@ -97,23 +95,25 @@ public class EditLecturerProfile {
 				currentImage.setContent(imageContent);
 				currentImage.setTableName("users");
 				currentImage.setContentType(profilePicture.getContentType());
-				
+
 				userDao.saveFile(currentImage);
-				
+
 				loggedUser.setProfilePicture(currentImage);
 			}
-		} 
-		
+		}
+
 		userDao.updateUser(loggedUser);
-		
-		if(loggedUser.getProfilePicture() != null && loggedUser.getProfilePicture().getId() != null) {
-			// strip the user profile picture so we won't be luring around the whole picture content in the session
+
+		if (loggedUser.getProfilePicture() != null
+				&& loggedUser.getProfilePicture().getId() != null) {
+			// strip the user profile picture so we won't be luring around the
+			// whole picture content in the session
 			FileModel strippedFile = new FileModel();
 			strippedFile.setId(loggedUser.getProfilePicture().getId());
 			loggedUser.setProfilePicture(strippedFile);
 		} else {
 			loggedUser.setProfilePicture(null);
-		}		
+		}
 
 		req.getSession().setAttribute("_loggedUser", loggedUser);
 

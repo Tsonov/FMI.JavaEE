@@ -107,7 +107,7 @@ public class UserModel implements Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "profile_picture_id", nullable = true)
 	public FileModel getProfilePicture() {
 		return profilePicture;

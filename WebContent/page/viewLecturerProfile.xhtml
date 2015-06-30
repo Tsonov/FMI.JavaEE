@@ -18,8 +18,13 @@
 				<h:outputText
 					value="#{viewLecturerProfileBean.lecturer.fullName}'s Profile"
 					escape="false" />
-				<h:form>
-
+				<h:form enctype="multipart/form-data">
+					<div class="span-2" style="margin-top: 60px; text-align: center;">
+						<h:graphicImage
+							value="/image.jpg?id=#{viewLecturerProfileBean.loggedUser.profilePicture.id}&amp;type=users"
+							styleClass="avatar takePhotoPicture"
+							style="width: 48px; height: 48px;" />
+					</div>
 				</h:form>
 			</h2>
 			<br clear="all" />

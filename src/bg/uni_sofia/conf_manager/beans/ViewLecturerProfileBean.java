@@ -20,12 +20,13 @@ public class ViewLecturerProfileBean {
 	private LecturerDao lecturerDao;
 
 	private LecturerModel lecturer;
+	private UserModel loggedUser;
 
 	@PostConstruct
 	public void init() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext
 				.getCurrentInstance().getExternalContext().getRequest();
-		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
+		loggedUser = GeneralUtils.getLoggedUser(req);
 		if (loggedUser != null) {
 			lecturer = loggedUser.getLecturer();
 		}
@@ -37,6 +38,14 @@ public class ViewLecturerProfileBean {
 
 	public void setLecturer(LecturerModel lecturer) {
 		this.lecturer = lecturer;
+	}
+
+	public UserModel getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(UserModel loggedUser) {
+		this.loggedUser = loggedUser;
 	}
 
 }
