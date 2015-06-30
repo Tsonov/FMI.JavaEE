@@ -89,9 +89,12 @@
 									<f:facet name="header">
 										<h:outputText value="Actions" />
 									</f:facet>
-									<h:link value="Details" outcome="conferenceDetails">
+									
+									<p:commandLink ajax="false" process="@this" immediate="true"  value="Details"
+									action="conferenceDetails.xhtml" id="editButton">
 										<f:param name="conferenceId" value="#{conference.id}"></f:param>
-									</h:link>
+									
+								</p:commandLink>
 								</p:column>
 							</p:dataTable>
 						</div>

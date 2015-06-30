@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -32,15 +33,17 @@ public class ConferenceDetailsBean {
 	
 	private ConferenceModel conference;
 	private List<LectureModel> lectures;
+	
+	private Long conferenceId;
 
 	@PostConstruct
 	public void init() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext
 				.getCurrentInstance().getExternalContext().getRequest();
 		String id = req.getParameter("conferenceId");
-		Long conferenceId;
+		
 		if (StringUtils.isEmpty(id)) {
-			conferenceId = 0L;
+			conferenceId = (Long) req.getAttribute("conferenceId");
 		} else {
 			conferenceId = Long.parseLong(id);
 		}

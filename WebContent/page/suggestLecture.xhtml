@@ -15,8 +15,8 @@
 			<div class="createPerson">
 
 				<h2>
-					<h:outputText 
-						value="Suggest a new lecture for #{suggestLectureBean.conference.title}" 
+					<h:outputText
+						value="Suggest a new lecture for #{suggestLectureBean.conference.title}"
 						escape="false" />
 
 				</h2>
@@ -42,13 +42,13 @@
 						<hr class="dashedLine" />
 						<br />
 						<h:panelGroup layout="block" styleClass="signupLabels">
-							<p:outputLabel for="synopsis" value="Provide a description for this lecture: " />
+							<p:outputLabel for="synopsis"
+								value="Provide a description for this lecture: " />
 						</h:panelGroup>
 						<h:panelGroup layout="block">
 							<p:inputTextarea id="synopsis"
 								value="#{suggestLectureBean.lecture.synopsis}" required="true"
-								rows="50"
-								cols="70">
+								rows="50" cols="70">
 								<p:watermark for="synopsis" value="Synopsis" />
 								<f:validateLength maximum="1000" minimum="20" />
 							</p:inputTextarea>
@@ -59,11 +59,14 @@
 					</div>
 					<h:panelGroup layout="block" styleClass="signupButtons">
 						<p:commandButton ajax="false"
-							action="#{suggestLectureBean.saveAction}"
-							value="Add suggestion" styleClass="okButton" />
+							action="#{suggestLectureBean.saveAction}" value="Add suggestion"
+							styleClass="okButton">
+							<f:param name="conferenceId" value="#{suggestLectureBean.conference.id}"></f:param>
+						</p:commandButton>
 						&nbsp;&nbsp;&nbsp;
-						<p:commandButton ajax="false" action="#{suggestLectureBean.goBackAction()}"
-							immediate="true" value="Cancel" styleClass="cancelButton">
+						<p:commandButton ajax="false"
+							action="#{suggestLectureBean.goBackAction()}" immediate="true"
+							value="Cancel" styleClass="cancelButton">
 						</p:commandButton>
 					</h:panelGroup>
 					<br clear="all" />

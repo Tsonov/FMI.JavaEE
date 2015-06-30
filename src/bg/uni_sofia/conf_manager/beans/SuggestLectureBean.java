@@ -54,11 +54,12 @@ public class SuggestLectureBean {
 		lecture.setLecturer(currentLecturer);
 		lecture.setConference(conference);
 		lectureDao.addLecture(lecture);
+
 		return goBackAction();
 	}
 	
 	public String goBackAction() {
-		return "/page/listAllConferences?faces-redirect=true";
+		return "/page/conferenceDetails?faces-redirect=true&conferenceId=" + conference.getId().toString();
 	}
 	
 	public ConferenceModel getConference() {
