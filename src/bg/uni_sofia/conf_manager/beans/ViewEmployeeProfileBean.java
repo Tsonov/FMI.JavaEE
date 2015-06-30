@@ -39,4 +39,3 @@ public class ViewEmployeeProfileBean {
 		this.employee = employee;
 	}
 }
-

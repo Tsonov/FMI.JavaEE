@@ -19,7 +19,7 @@ import bg.uni_sofia.conf_manager.enums.UserType;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 import bg.uni_sofia.conf_manager.utils.MessageUtils;
 
-@ManagedBean(name="createEmployeeBean")
+@ManagedBean(name = "createEmployeeBean")
 @ViewScoped
 public class CreateEmployeeBean implements Serializable {
 
@@ -30,10 +30,10 @@ public class CreateEmployeeBean implements Serializable {
 
 	@EJB
 	private EmployeeDao employeeDao;
-	
+
 	@EJB
 	private UserDao userDao;
-	
+
 	private Long employeeId;
 	private EmployeeModel employee;
 	private String operationType;
@@ -41,22 +41,23 @@ public class CreateEmployeeBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		String opTypeFromRequest = req.getParameter("operationType");
 		String personIdStr = req.getParameter("employeeId");
-		
+
 		loggedUser = GeneralUtils.getLoggedUser(req);
-		
 
 		if (StringUtils.isBlank(personIdStr)) {
 			employeeId = (Long) req.getAttribute("employeeId");
-		} else if(loggedUser.getEmployee() != null) {
+		} else if (loggedUser.getEmployee() != null) {
 			employeeId = loggedUser.getEmployee().getId();
-		}else {
+		} else {
 			employeeId = Long.valueOf(personIdStr);
 		}
 
-		if (StringUtils.isBlank(operationType) && StringUtils.isNotBlank(opTypeFromRequest)) {
+		if (StringUtils.isBlank(operationType)
+				&& StringUtils.isNotBlank(opTypeFromRequest)) {
 			setOperationType(opTypeFromRequest);
 		} else if (StringUtils.isBlank(operationType)) {
 			setOperationType("CREATE");
@@ -77,13 +78,14 @@ public class CreateEmployeeBean implements Serializable {
 	public String editAction(Long entityId) {
 		setOperationType("UPDATE");
 
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		req.setAttribute("employeeId", entityId);
 		return "/page/createEmployee";
 	}
 
 	protected String getSuccessRedirect() {
-		
+
 		if (operationType.equals("UPDATE")) {
 			MessageUtils.addFlashMessage("Employee is updated successfully!");
 		} else if (operationType.equals("CREATE")) {
@@ -91,45 +93,47 @@ public class CreateEmployeeBean implements Serializable {
 		}
 
 		String returnUrl = "";
-		if(loggedUser.getAdmin()!= null) {
+		if (loggedUser.getAdmin() != null) {
 			returnUrl = "/page/listAllEmployees";
-		} else if(loggedUser.getEmployee() != null) {
+		} else if (loggedUser.getEmployee() != null) {
 			returnUrl = "/page/viewEmployeeProfile";
 		}
 		return returnUrl;
 	}
-	
+
 	private boolean validate() {
 		// TODO
 		return true;
 	}
-	
+
 	public String saveAction() {
-		if(!validate()) {
+		if (!validate()) {
 			return null;
 		} else {
 			String plainPassword = employee.getPassword();
-			String encryptedPassword = GeneralUtils.encodeSha256Password(plainPassword);
+			String encryptedPassword = GeneralUtils
+					.encodeSha256Password(plainPassword);
 			employee.setPassword(encryptedPassword);
 			employee.setId(null);
-			
+
 			UserModel user = new UserModel();
 			user.setType(UserType.EMPLOYEE);
 			user.setEmployee(employee);
 			user.setUsername(employee.getUsername());
 			user.setPassword(employee.getPassword());
-			
+
 			userDao.addUser(user);
 			return getSuccessRedirect();
 		}
 	}
-	
+
 	public String updateAction() {
-		if(!validate()) {
+		if (!validate()) {
 			return null;
 		} else {
 			String plainPassword = employee.getPassword();
-			String encryptedPassword = GeneralUtils.encodeSha256Password(plainPassword);
+			String encryptedPassword = GeneralUtils
+					.encodeSha256Password(plainPassword);
 			employee.setPassword(encryptedPassword);
 			employeeDao.updateEmployee(employee);
 			return getSuccessRedirect();

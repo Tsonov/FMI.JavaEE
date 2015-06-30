@@ -17,15 +17,14 @@ public class EmployeeHomeBean {
 
 	@EJB
 	private LectureDao lectureDao;
-	
-	private List<LectureModel> unapprovedLectures;
 
+	private List<LectureModel> unapprovedLectures;
 
 	@PostConstruct
 	public void init() {
 		List<LectureModel> lec = lectureDao.findAllUnapproved();
 		unapprovedLectures = new ArrayList<LectureModel>();
-		for(LectureModel em : lec) {
+		for (LectureModel em : lec) {
 			unapprovedLectures.add(em);
 		}
 	}
@@ -36,12 +35,4 @@ public class EmployeeHomeBean {
 	public List<LectureModel> getUnapprovedLectures() {
 		return unapprovedLectures;
 	}
-
-//	public List<ConferenceModel> getFiltredEmployeesList() {
-//		return filteredList;
-//	}
-//
-//	public void ConferenceModel(List<ConferenceModel> filteredList) {
-//		this.filteredList = filteredList;
-//	}
 }

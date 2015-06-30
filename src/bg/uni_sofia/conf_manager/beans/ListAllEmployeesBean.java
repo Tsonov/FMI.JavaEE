@@ -28,7 +28,7 @@ public class ListAllEmployeesBean {
 	public void init() {
 		List<EmployeeModel> employees = employeeDao.findAll();
 		allEmployeesList = new ArrayList<EmployeeModel>();
-		for(EmployeeModel em : employees) {
+		for (EmployeeModel em : employees) {
 			allEmployeesList.add(em);
 		}
 	}

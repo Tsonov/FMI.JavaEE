@@ -91,7 +91,7 @@
 									</f:facet>
 									
 									<p:commandLink ajax="false" process="@this" immediate="true"  value="Details"
-									action="conferenceDetails.xhtml" id="editButton">
+									action="conferenceDetails.xhtml" id="editButton" rendered="#{loginBean.isLecturer()}">
 										<f:param name="conferenceId" value="#{conference.id}"></f:param>
 									
 								</p:commandLink>

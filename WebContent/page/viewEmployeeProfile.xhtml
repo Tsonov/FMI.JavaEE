@@ -18,13 +18,6 @@
 				<h:outputText
 					value="#{viewEmployeeProfileBean.employee.fullName}'s Profile"
 					escape="false" />
-				<h:form>
-				
-				<p:commandButton ajax="false" process="@this" action="#{createEmployeeBean.editAction(employee.id)}"
-							value="Edit" styleClass="okButton" >
-							<f:param name="employeeId" value="#{employee.id}" />
-							</p:commandButton>
-				</h:form>
 			</h2>
 			<br clear="all" />
 			<h:panelGroup layout="block" styleClass="signupLabels">
@@ -68,6 +61,12 @@
 			<h:form>
 
 				<h:panelGroup layout="block" styleClass="create">
+					<p:commandButton ajax="false" process="@this"
+						action="#{createEmployeeBean.editAction(employee.id)}"
+						value="Edit" styleClass="okButton">
+						<f:param name="employeeId" value="#{employee.id}" />
+					</p:commandButton>
+
 					<p:commandButton ajax="false"
 						action="/page/home?faces-redirect=true" immediate="true"
 						value="Back" styleClass="cancelButton">

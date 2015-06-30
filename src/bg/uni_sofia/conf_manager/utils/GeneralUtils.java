@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -20,18 +18,6 @@ import org.bouncycastle.util.encoders.Hex;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 
 public class GeneralUtils {
-	
-	private static Properties prop;
-	private static final Logger LOGGER = Logger.getLogger(GeneralUtils.class.getName());
-	
-
-	public static Properties getProp() {
-		return prop;
-	}
-
-	public static void setProp(Properties prop) {
-		GeneralUtils.prop = prop;
-	}
 
 	public static UserModel getLoggedUser(Object request) {
 		if (request instanceof HttpServletRequest) {

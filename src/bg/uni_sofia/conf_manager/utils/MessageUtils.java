@@ -4,11 +4,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
-/**
- * 
- * @author Nia
- *
- */
 public class MessageUtils {
 
 	public static String getMessage(String aKey) {
@@ -36,11 +31,7 @@ public class MessageUtils {
 		addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, aMsgId, null));
 	}
 	
-	public static String cleanHTML(String aText) {
-		String cleanedText = aText.replace("\"", "");
-		cleanedText = cleanedText.replace("'", "");
-		cleanedText = cleanedText.replace("`", "");
-
-		return cleanedText;
+	public static void addSuccessMessage(String aMsgId) {
+		addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, aMsgId, null));
 	}
 }

@@ -34,104 +34,113 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = -404342799112068677L;
 
 	@EJB
-    private LecturerDao lecturerDAO;
+	private LecturerDao lecturerDAO;
 
 	@EJB
 	private UserDao userDAO;
-
 
 	private String mUsername;
 	private String mPassword;
 	private String mEmail;
 
-	//private Logger log = Logger.getLogger(LoginBean.class);
-
 	@PostConstruct
 	public void init() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		req.getContentType();
 	}
 
 	public String login() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
+
 		if (StringUtils.isBlank(mUsername) || StringUtils.isBlank(mPassword)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username and password are required"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Username and password are required"));
 			return null;
 		}
-		
+
 		String cryptedPassword = GeneralUtils.encodeSha256Password(mPassword);
 		UserModel user = userDAO.loginUser(mUsername, cryptedPassword);
 
-		if(user == null || user.getId() == null) {
+		if (user == null || user.getId() == null) {
 			MessageUtils.addErrorMessage("Wrong username or password");
 			return null;
 		}
-		
+
 		Set<String> permissions = new HashSet<String>();
 		req.getSession().setAttribute("_loggedUser", user);
-		
+
 		String returnUrl = null;
-		if(user.getType().equals(UserType.ADMIN)){
+		if (user.getType().equals(UserType.ADMIN)) {
 			permissions.add("PERMISSIONS_ADMIN");
 			returnUrl = "adminPage?faces-redirect=true";
-		} else if(user.getType().equals(UserType.EMPLOYEE)) {
+		} else if (user.getType().equals(UserType.EMPLOYEE)) {
 			permissions.add("PERMISSIONS_EMPLOYEE");
 			returnUrl = "employeeHome?faces-redirect=true";
-		} else if(user.getType().equals(UserType.LECTURER)) {
+		} else if (user.getType().equals(UserType.LECTURER)) {
 			permissions.add("PERMISSIONS_LECTURER");
 			returnUrl = "listAllConferences?faces-redirect=true";
 		}
-		
+
 		user.setPermissions(permissions);
-		
+
 		return returnUrl;
 	}
 
 	/** log out the current user */
 	public String logout() {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("_topMenu");
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("_loggedUser");
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.remove("_topMenu");
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.remove("_loggedUser");
+		FacesContext.getCurrentInstance().getExternalContext()
+				.invalidateSession();
 
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
+
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(req.getContextPath() + "/logout.jsp");
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect(req.getContextPath() + "/logout.jsp");
 			FacesContext.getCurrentInstance().responseComplete();
 		} catch (IOException e) {
-	//		log.error(e);
 			throw new FacesException(e);
 		}
-		
+
 		return null;
 	}
-	
+
 	public boolean isAdmin() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
 		boolean type = false;
-		if(loggedUser != null && loggedUser.getType().equals(UserType.ADMIN)) {
+		if (loggedUser != null && loggedUser.getType().equals(UserType.ADMIN)) {
 			type = true;
 		}
 		return type;
 	}
-	
+
 	public boolean isLecturer() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
 		boolean type = false;
-		if(loggedUser != null && loggedUser.getType().equals(UserType.LECTURER)) {
+		if (loggedUser != null
+				&& loggedUser.getType().equals(UserType.LECTURER)) {
 			type = true;
 		}
 		return type;
 	}
-	
+
 	public boolean isEmployee() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		UserModel loggedUser = GeneralUtils.getLoggedUser(req);
 		boolean type = false;
-		if(loggedUser != null && loggedUser.getType().equals(UserType.EMPLOYEE)) {
+		if (loggedUser != null
+				&& loggedUser.getType().equals(UserType.EMPLOYEE)) {
 			type = true;
 		}
 		return type;

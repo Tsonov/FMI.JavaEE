@@ -25,7 +25,7 @@ public class ListAllConferencesBean {
 	public void init() {
 		List<ConferenceModel> conferences = conferenceDao.findAll();
 		allConferences = new ArrayList<ConferenceModel>();
-		for(ConferenceModel em : conferences) {
+		for (ConferenceModel em : conferences) {
 			allConferences.add(em);
 		}
 	}

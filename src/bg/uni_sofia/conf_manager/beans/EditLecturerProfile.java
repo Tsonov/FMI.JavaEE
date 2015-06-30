@@ -70,13 +70,8 @@ public class EditLecturerProfile {
 
 		}
 
-		if (profilePicture != null && profilePicture.getContents() != null) {
+		if (profilePicture != null && profilePicture.getContents() != null && profilePicture.getContents().length != 0) {
 			String imageName = profilePicture.getFileName();
-			/*
-			 * if(!ValidationUtils.validateFileExtension(imageName)) {
-			 * MessageUtils.addErrorMessage("error_incorrect_image"); return
-			 * null; }
-			 */
 
 			byte[] imageContent = GeneralUtils.resizeProfilePicture(
 					profilePicture.getContents(), imageName, 50, 50);
@@ -117,9 +112,9 @@ public class EditLecturerProfile {
 
 		req.getSession().setAttribute("_loggedUser", loggedUser);
 
-		MessageUtils.addFlashMessage("Profile is updated successfully!");
+		MessageUtils.addSuccessMessage("Profile is updated successfully!");
 
-		return "/page/viewProfile?faces-redirect=true";
+		return "/page/viewLecturerProfile?faces-redirect=true";
 	}
 
 	public LecturerModel getLecturer() {

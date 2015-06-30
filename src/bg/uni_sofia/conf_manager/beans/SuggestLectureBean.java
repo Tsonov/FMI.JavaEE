@@ -21,13 +21,12 @@ import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 @ViewScoped
 public class SuggestLectureBean {
 
-	
 	@EJB
 	private ConferenceDao conferenceDao;
-	
+
 	@EJB
 	private LectureDao lectureDao;
-	
+
 	private ConferenceModel conference;
 	private LecturerModel currentLecturer;
 	private LectureModel lecture;
@@ -48,30 +47,30 @@ public class SuggestLectureBean {
 		conference = conferenceDao.findById(conferenceId);
 		lecture = new LectureModel();
 	}
-	
+
 	public String saveAction() {
-		lecture.setApproved((Boolean)null);
+		lecture.setApproved((Boolean) null);
 		lecture.setLecturer(currentLecturer);
 		lecture.setConference(conference);
 		lectureDao.addLecture(lecture);
 
 		return goBackAction();
 	}
-	
+
 	public String goBackAction() {
-		return "/page/conferenceDetails?faces-redirect=true&conferenceId=" + conference.getId().toString();
+		return "/page/conferenceDetails?faces-redirect=true&conferenceId="
+				+ conference.getId().toString();
 	}
-	
+
 	public ConferenceModel getConference() {
 		return this.conference;
 	}
-	
+
 	public LecturerModel getLecturer() {
 		return this.currentLecturer;
 	}
-	
+
 	public LectureModel getLecture() {
 		return this.lecture;
 	}
-	
 }

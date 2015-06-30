@@ -21,27 +21,28 @@ public class CreateConferenceBean implements Serializable {
 
 	private static final long serialVersionUID = -5211110208249218990L;
 
-	
 	@EJB
 	private ConferenceDao conferenceDao;
-	
+
 	private Long conferenceId;
 	private ConferenceModel conference;
 	private String operationType;
 
 	@PostConstruct
 	public void init() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		String opTypeFromRequest = req.getParameter("operationType");
 		String conferenceIdParam = req.getParameter("conferenceId");
 
 		if (StringUtils.isBlank(conferenceIdParam)) {
 			conferenceId = (Long) req.getAttribute("conferenceId");
-		}else {
+		} else {
 			conferenceId = Long.valueOf(conferenceIdParam);
 		}
 
-		if (StringUtils.isBlank(operationType) && StringUtils.isNotBlank(opTypeFromRequest)) {
+		if (StringUtils.isBlank(operationType)
+				&& StringUtils.isNotBlank(opTypeFromRequest)) {
 			setOperationType(opTypeFromRequest);
 		} else if (StringUtils.isBlank(operationType)) {
 			setOperationType("CREATE");
@@ -61,13 +62,14 @@ public class CreateConferenceBean implements Serializable {
 	public String editAction(Long entityId) {
 		setOperationType("UPDATE");
 
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		req.setAttribute("conferenceId", entityId);
 		return "/page/createConference";
 	}
 
 	protected String getSuccessRedirect() {
-		
+
 		if (operationType.equals("UPDATE")) {
 			MessageUtils.addFlashMessage("Conference is updated successfully!");
 		} else if (operationType.equals("CREATE")) {
@@ -76,23 +78,23 @@ public class CreateConferenceBean implements Serializable {
 
 		return "/page/listAllConferences?faces-redirect=true";
 	}
-	
+
 	private boolean validate() {
 		// TODO
 		return true;
 	}
-	
+
 	public String saveAction() {
-		if(!validate()) {
+		if (!validate()) {
 			return null;
 		} else {
 			conferenceDao.addConference(conference);
 			return getSuccessRedirect();
 		}
 	}
-	
+
 	public String updateAction() {
-		if(!validate()) {
+		if (!validate()) {
 			return null;
 		} else {
 			conferenceDao.updateConference(conference);
