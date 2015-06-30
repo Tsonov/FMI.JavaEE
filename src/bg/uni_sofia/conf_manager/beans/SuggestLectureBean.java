@@ -1,8 +1,5 @@
 package bg.uni_sofia.conf_manager.beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -16,12 +13,13 @@ import bg.uni_sofia.conf_manager.dao.ConferenceDao;
 import bg.uni_sofia.conf_manager.dao.LectureDao;
 import bg.uni_sofia.conf_manager.entity.ConferenceModel;
 import bg.uni_sofia.conf_manager.entity.LectureModel;
+import bg.uni_sofia.conf_manager.entity.LecturerModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 import bg.uni_sofia.conf_manager.utils.GeneralUtils;
 
 @ManagedBean
 @ViewScoped
-public class ConferenceDetailsBean {
+public class SuggestLectureBean {
 
 	
 	@EJB
@@ -31,7 +29,8 @@ public class ConferenceDetailsBean {
 	private LectureDao lectureDao;
 	
 	private ConferenceModel conference;
-	private List<LectureModel> lectures;
+	private LecturerModel currentLecturer;
+	private LectureModel lecture;
 
 	@PostConstruct
 	public void init() {
@@ -44,35 +43,34 @@ public class ConferenceDetailsBean {
 		} else {
 			conferenceId = Long.parseLong(id);
 		}
+		UserModel currentUser = GeneralUtils.getLoggedUser(req);
+		currentLecturer = currentUser.getLecturer();
 		conference = conferenceDao.findById(conferenceId);
-		
-		// Get the lectures for the current screen
-		lectures = new ArrayList<LectureModel>();
-		for(LectureModel lecture : lectureDao.findAllForConference(conference.getId())) {
-			lectures.add(lecture);
-		}
+		lecture = new LectureModel();
+	}
+	
+	public String saveAction() {
+		lecture.setApproved(false);
+		lecture.setLecturer(currentLecturer);
+		lecture.setConference(conference);
+		lectureDao.addLecture(lecture);
+		return goBackAction();
+	}
+	
+	public String goBackAction() {
+		return "/page/conferenceDetails?faces-redirect=true;conferenceId=" + conference.getId().toString();
 	}
 	
 	public ConferenceModel getConference() {
 		return this.conference;
 	}
 	
-	public String suggestLectureAction() {
-		return "/page/suggestLecture?faces-redirect=true&conferenceId=" + conference.getId().toString();
+	public LecturerModel getLecturer() {
+		return this.currentLecturer;
 	}
 	
-	public boolean isCurrentLecturer(String id) throws Exception {
-		Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		UserModel currentUser = GeneralUtils.getLoggedUser(request);
-		if (currentUser.getLecturer() != null) {
-			return id.equals(currentUser.getLecturer().getId().toString());
-		} else {
-			throw new Exception("Invalid state, logged user should be a lecturer...");
-		}
-	}
-
-	public List<LectureModel> getLectures() {
-		return lectures;
+	public LectureModel getLecture() {
+		return this.lecture;
 	}
 	
 }

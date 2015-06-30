@@ -21,7 +21,9 @@ public class LectureModel implements Serializable {
 	
 	private String title;
 	private String synopsis;
-	private ConferenceModel conference;
+	private boolean isApproved;
+	private ConferenceModel conference = new ConferenceModel();
+	private LecturerModel lecturer = new LecturerModel();
 	
 
 	@Id
@@ -34,7 +36,7 @@ public class LectureModel implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="title")
+	@Column(name="title", length = 100)
 	public String getTitle() {
 		return title;
 	}
@@ -43,7 +45,7 @@ public class LectureModel implements Serializable {
 		this.title = title;
 	}
 
-	@Column(name="synopsis")
+	@Column(name="synopsis", length = 1000)
 	public String getSynopsis() {
 		return synopsis;
 	}
@@ -52,6 +54,15 @@ public class LectureModel implements Serializable {
 		this.synopsis = synopsis;
 	}
 	
+	@Column(name="is_approved")
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "conference_id", nullable = false)
 	public ConferenceModel getConference() {
@@ -60,9 +71,19 @@ public class LectureModel implements Serializable {
 
 	public void setConference(ConferenceModel conference) {
 		this.conference = conference;
-		if (!this.conference.getLectures().contains(this)) {
-			this.conference.getLectures().add(this);
-		}
+//		if ((conference != null) && !conference.getLectures().contains(this)) {
+//			this.conference.getLectures().add(this);
+//		}
+	}
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "lecturer_id", nullable = false)
+	public LecturerModel getLecturer() {
+		return lecturer;
+	}
+
+	public void setLecturer(LecturerModel lecturer) {
+		this.lecturer = lecturer;
 	}
 
 	@Override

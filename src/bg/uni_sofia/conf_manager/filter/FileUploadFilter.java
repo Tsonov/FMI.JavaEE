@@ -20,7 +20,6 @@ import org.primefaces.webapp.MultipartRequest;
 /**
  * Custom fileUpload filter in order to handle cyrilic and utf-8 
  * problems with primefaces file upload
- * @author Ivo
  *
  */
 public class FileUploadFilter implements Filter {

@@ -2,6 +2,7 @@ package bg.uni_sofia.conf_manager.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +17,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CONFERENCES")
 public class ConferenceModel implements Serializable {
+	
+	public ConferenceModel() {
+		super();
+	}
+
 	private static final long serialVersionUID = -1950507424390163030L;
 
 	private Long id;
@@ -24,7 +30,7 @@ public class ConferenceModel implements Serializable {
 	private String venueAddress;
 	private Date startDate;
 	private Date endDate;
-	private List<LectureModel> lectures;
+	//private List<LectureModel> lectures = new ArrayList<LectureModel>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,21 +78,21 @@ public class ConferenceModel implements Serializable {
 		this.endDate = endDate;
 	}
 	
-	@OneToMany(mappedBy="conference", fetch=FetchType.EAGER)
-	public List<LectureModel> getLectures() {
-		return lectures;
-	}
-
-	public void setLectures(List<LectureModel> lectures) {
-		this.lectures = lectures;
-	}
-	
-	public void addLecture(LectureModel lecture) {
-		this.lectures.add(lecture);
-		if (lecture.getConference() != this) {
-			lecture.setConference(this);
-		}
-	}
+//	@OneToMany(mappedBy="conference", fetch=FetchType.EAGER)
+//	public List<LectureModel> getLectures() {
+//		return lectures;
+//	}
+//
+//	public void setLectures(List<LectureModel> lectures) {
+//		this.lectures = lectures;
+//	}
+//	
+//	public void addLecture(LectureModel lecture) {
+//		this.getLectures().add(lecture);
+//		if(lecture.getConference() != this) {
+//			lecture.setConference(this);
+//		}
+//	}
 
 	@Override
 	public boolean equals(Object obj) {

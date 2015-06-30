@@ -4,43 +4,39 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui" template="/page/layout/main.xhtml">
-
-
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:exp="http://developsoft.custom.component/"
+	template="/page/layout/main.xhtml">
 
 	<ui:define name="bodyContent">
 		<div id="main-wrapper">
-			<div class="">
- 				<h2>
-					<h:outputText value="#{conferenceDetailsBean.conference.title}" />
-				</h2> 
-
-				<br clear="all" /> 
-
-				<h:form id="conference"> 
-					<h:inputHidden value="#{conferenceDetailsBean.conference.id}" id="id" /> 
-					<h:outputText value="Running from #{conferenceDetailsBean.conference.startDate} to #{conferenceDetailsBean.conference.endDate}"></h:outputText> 
- 					<br />
- 					<h:outputText value="Location: #{conferenceDetailsBean.conference.venueAddress}"></h:outputText>
-					<br clear="all" /> 
+			<div class="formdiv">
+				<h:form id="unapprovedLectures">
+					<h2>
+						<h:outputText value="Lectures awaiting approval" escape="false" style="color:#002437;" />
+					</h2>
+					<br clear="all" />
+	
 					<div class="usersTableStyle">
 							<br clear="all" />
-							<p:dataTable id="lecturesGrid" 
-								styleClass="employeeTable" 
-								var="lecture"
-								value="#{conferenceDetailsBean.lectures}" 
+							<p:dataTable id="lecturesGrid" styleClass="employeeTable" var="lecture"
+								value="#{employeeHomeBean.unapprovedLectures}" 
+								paginator="true" 
+								rowsPerPageTemplate="15,20,25"
 								rows="15" 
-								sortBy="#{lecture.id}" 
+								sortBy="#{lecture.conference.startDate}" 
 								sortOrder="ascending"
+								paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								paginatorPosition="bottom" 
 								rowKey="#{lecture.id}" 
 								emptyMessage="No records"
 								widgetVar="lecturesGrid"
 								resizableColumns="true">
 	
 								<f:facet name="header">
-									<h:outputText value="Lectures approved for this conference" styleClass="filterLabel" />
+									<h:outputText value="Unapproved lectures" styleClass="filterLabel" />
 									<p:inputText id="globalFilter" onkeyup="PF('lecturesGrid').filter()"
 										styleClass="globalFilter">
 										<p:watermark value="Enter keyword" for="globalFilter" />
@@ -49,7 +45,7 @@
 	
 								<p:column sortBy="#{lecture.title}" filterBy="#{lecture.title}"
 									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains" width="30%">
+									filterMatchMode="contains" width="10%">
 									<f:facet name="header">
 										<h:outputText value="Title" />
 									</f:facet>
@@ -58,7 +54,7 @@
 	
 								<p:column sortBy="#{lecture.synopsis}" filterBy="#{lecture.synopsis}"
 									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains" width="55%">
+									filterMatchMode="contains" width="50%">
 									<f:facet name="header">
 										<h:outputText value="Short description" />
 									</f:facet>
@@ -67,29 +63,33 @@
 								
 								<p:column sortBy="#{lecture.lecturer.fullName}" filterBy="#{lecture.lecturer.fullName}"
 									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains" width="15%">
+									filterMatchMode="contains" width="10%">
 									<f:facet name="header">
 										<h:outputText value="Presented by" />
 									</f:facet>
-									<h:outputText value="#{lecture.lecturer.fullName}" rendered="#{conferenceDetailsBean.isCurrentLecturer(lecture.lecturer.id.toString())}" />
-									<h:outputText value="You!" rendered="#{conferenceDetailsBean.isCurrentLecturer(lecture.lecturer.id.toString())} == false" />
+									<h:outputText value="#{lecture.lecturer.fullName}"  />
+								</p:column>
+								
+								<p:column sortBy="#{lecture.conference.title}" filterBy="#{lecture.conference.title}"
+									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
+									filterMatchMode="contains" width="10%">
+									<f:facet name="header">
+										<h:outputText value="For conference" />
+									</f:facet>
+									<h:outputText value="#{lecture.conference.title}"  />
+								</p:column>
+								
+								<p:column style="height: 15px; font-size: 10pt;" exportable="false" styleClass="colType" width="10%">
+									<f:facet name="header">
+										<h:outputText value="Actions" />
+									</f:facet>
 								</p:column>
 							</p:dataTable>
 						</div>
-						<hr class="dashedLine" />
-						<h:panelGroup layout="block" styleClass="signupButtons">
-							<p:commandButton ajax="false" action="#{conferenceDetailsBean.suggestLectureAction}"
-								immediate="true" value="Suggest a lecture" styleClass="okButton">
-								<f:param name="conferenceId" value="#{conferenceDetailsBean.conference.id}"></f:param>
-							</p:commandButton>
-							<p:commandButton ajax="false" action="/page/listAllConferences?faces-redirect=true"
-								immediate="true" value="Back" styleClass="cancelButton" />
-						</h:panelGroup>
-				</h:form> 
+					</h:form>
 			</div>
 
 		</div>
 
 	</ui:define>
-
 </ui:composition>

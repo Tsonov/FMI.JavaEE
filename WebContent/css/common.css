@@ -889,3 +889,10 @@ tbody td,.usersTable th,.usersTable .ui-paginator {
 	background-size: 20px 20px !important;
 	background-repeat: no-repeat !important;
 }
+
+.dashedLine {
+	border-top: 1px dashed #d4d4d4; 
+	border-bottom: none; 
+	width: 480px; 
+	margin: 20px 0px 0px 0px;
+}
