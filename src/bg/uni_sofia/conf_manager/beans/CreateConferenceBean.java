@@ -74,7 +74,7 @@ public class CreateConferenceBean implements Serializable {
 			MessageUtils.addFlashMessage("Conference is created successfully!");
 		}
 
-		return "/page/allConferences?faces-redirect=true";
+		return "/page/listAllConferences?faces-redirect=true";
 	}
 	
 	private boolean validate() {

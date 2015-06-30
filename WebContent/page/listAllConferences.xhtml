@@ -19,7 +19,7 @@
 					</h2>
 					<br clear="all" />
 					<div class="buttonsUpLayout">
-						<h:panelGroup layout="block" styleClass="create">
+						<h:panelGroup layout="block" styleClass="create" rendered="#{loginBean.isEmployee()}">
 							<p:commandButton ajax="false" action="/page/createConference.xhtml"
 								immediate="true" value="Add a conference" styleClass="createButton" />
 						</h:panelGroup>

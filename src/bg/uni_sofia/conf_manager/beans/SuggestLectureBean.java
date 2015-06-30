@@ -58,7 +58,7 @@ public class SuggestLectureBean {
 	}
 	
 	public String goBackAction() {
-		return "/page/conferenceDetails?faces-redirect=true;conferenceId=" + conference.getId().toString();
+		return "/page/listAllConferences?faces-redirect=true";
 	}
 	
 	public ConferenceModel getConference() {

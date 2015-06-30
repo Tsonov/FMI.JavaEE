@@ -79,7 +79,7 @@
 						<hr class="dashedLine" />
 						<h:panelGroup layout="block" styleClass="signupButtons">
 							<p:commandButton ajax="false" action="#{conferenceDetailsBean.suggestLectureAction}"
-								immediate="true" value="Suggest a lecture" styleClass="okButton">
+								immediate="true" value="Suggest a lecture" styleClass="okButton" rendered="#{loginBean.isLecturer()}">
 								<f:param name="conferenceId" value="#{conferenceDetailsBean.conference.id}"></f:param>
 							</p:commandButton>
 							<p:commandButton ajax="false" action="/page/listAllConferences?faces-redirect=true"
