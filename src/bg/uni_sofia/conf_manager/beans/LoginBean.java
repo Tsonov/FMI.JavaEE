@@ -74,7 +74,7 @@ public class LoginBean implements Serializable {
 		String returnUrl = null;
 		if (user.getType().equals(UserType.ADMIN)) {
 			permissions.add("PERMISSIONS_ADMIN");
-			returnUrl = "adminPage?faces-redirect=true";
+			returnUrl = "listAllEmployees?faces-redirect=true";
 		} else if (user.getType().equals(UserType.EMPLOYEE)) {
 			permissions.add("PERMISSIONS_EMPLOYEE");
 			returnUrl = "employeeHome?faces-redirect=true";

@@ -302,7 +302,7 @@ p,ol {
 .signupLabels {
 	color: #002437;
 	float: left;
-	width: 170px;
+	width: 180px !important;
 	margin-top: 5px;
 }
 
