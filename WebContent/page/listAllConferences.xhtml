@@ -74,7 +74,9 @@
 									<f:facet name="header">
 										<h:outputText value="Starts" />
 									</f:facet>
-									<h:outputText value="#{conference.startDate}" />
+									<h:outputFormat value="{0, date, dd/MM/yyyy}" >
+										<f:param value="#{conference.startDate}"></f:param>
+									</h:outputFormat>
 								</p:column>
 								<p:column sortBy="#{conference.endDate}" filterBy="#{conference.endDate}"
 									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
@@ -82,7 +84,9 @@
 									<f:facet name="header">
 										<h:outputText value="Ends" />
 									</f:facet>
-									<h:outputText value="#{conference.endDate}" />
+									<h:outputFormat value="{0, date, dd/MM/yyyy}" >
+										<f:param value="#{conference.endDate}"></f:param>
+									</h:outputFormat>
 								</p:column>
 								
 								<p:column style="height: 15px; font-size: 10pt;" exportable="false" styleClass="colType">

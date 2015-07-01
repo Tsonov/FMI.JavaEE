@@ -21,7 +21,10 @@
 
 				<h:form id="conference"> 
 					<h:inputHidden value="#{conferenceDetailsBean.conference.id}" id="id"/> 
-					<h:outputText value="Running from #{conferenceDetailsBean.conference.startDate} to #{conferenceDetailsBean.conference.endDate}"></h:outputText> 
+					<h:outputFormat value="Running from {0, date, dd/MM/yyyy} to {1, date, dd/MM/yyyy}">
+						<f:param value="#{conferenceDetailsBean.conference.startDate}"></f:param>
+						<f:param value="#{conferenceDetailsBean.conference.endDate}"></f:param>
+					</h:outputFormat> 
  					<br />
  					<h:outputText value="Location: #{conferenceDetailsBean.conference.venueAddress}"></h:outputText>
 					<br clear="all" /> 
@@ -62,7 +65,7 @@
 									<f:facet name="header">
 										<h:outputText value="Short description" />
 									</f:facet>
-									<h:outputText value="#{lecture.synopsis}" />
+									<h:outputText value="#{lecture.synopsis}" style="white-space: normal;" />
 								</p:column>
 								
 								<p:column sortBy="#{lecture.lecturer.fullName}" filterBy="#{lecture.lecturer.fullName}"
