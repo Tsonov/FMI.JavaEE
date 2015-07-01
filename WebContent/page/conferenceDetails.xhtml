@@ -74,15 +74,15 @@
 									<f:facet name="header">
 										<h:outputText value="Presented by" />
 									</f:facet>
-									<h:outputText value="#{lecture.lecturer.fullName}" rendered="#{conferenceDetailsBean.isCurrentLecturer(lecture.lecturer.id.toString())}" />
-									<h:outputText value="You!" rendered="#{conferenceDetailsBean.isCurrentLecturer(lecture.lecturer.id.toString())} == false" />
+									<h:outputText value="#{lecture.lecturer.fullName}" />
 								</p:column>
 							</p:dataTable>
 						</div>
 						<hr class="dashedLine" />
 						<h:panelGroup layout="block" styleClass="signupButtons">
 							<p:commandButton ajax="false" action="/page/suggestLecture.xhtml"
-								immediate="true" value="Suggest a lecture" styleClass="okButton" rendered="#{loginBean.isLecturer()}">
+								immediate="true" value="Suggest a lecture" styleClass="okButton" rendered="#{loginBean.isLecturer()}"
+								disabled="#{conferenceDetailsBean.conference.canAddLectures() == false}">
 								<f:param name="conferenceId" value="#{conferenceDetailsBean.conference.id}"></f:param>
 							</p:commandButton>
 							<p:commandButton ajax="false" action="/page/listAllConferences?faces-redirect=true"
