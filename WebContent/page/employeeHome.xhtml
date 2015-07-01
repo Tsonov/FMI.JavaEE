@@ -54,11 +54,11 @@
 	
 								<p:column sortBy="#{lecture.synopsis}" filterBy="#{lecture.synopsis}"
 									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains" width="50%">
+									filterMatchMode="contains" width="45%">
 									<f:facet name="header">
 										<h:outputText value="Short description" />
 									</f:facet>
-									<h:outputText value="#{lecture.synopsis}" />
+									<h:outputText value="#{lecture.synopsis}" style="white-space: normal;" />
 								</p:column>
 								
 								<p:column sortBy="#{lecture.lecturer.fullName}" filterBy="#{lecture.lecturer.fullName}"
@@ -79,10 +79,14 @@
 									<h:outputText value="#{lecture.conference.title}"  />
 								</p:column>
 								
-								<p:column style="height: 15px; font-size: 10pt;" exportable="false" styleClass="colType" width="10%">
+								<p:column style="height: 15px; font-size: 10pt;" exportable="false" styleClass="colType" width="20%">
 									<f:facet name="header">
 										<h:outputText value="Actions" />
 									</f:facet>
+									<p:commandButton ajax="false" action="#{employeeHomeBean.approve(lecture.id)}"
+											immediate="true" value="Approve" styleClass="okButton" style="width:100px !important;height:30px !important;" />
+									<p:commandButton ajax="false" action="#{employeeHomeBean.refuse(lecture.id)}"
+											immediate="true" value="Refuse" styleClass="cancelButton" style="width:100px !important;height:30px !important;" />
 								</p:column>
 							</p:dataTable>
 						</div>
