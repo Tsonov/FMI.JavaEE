@@ -80,7 +80,10 @@ public class CreateConferenceBean implements Serializable {
 	}
 
 	private boolean validate() {
-		// TODO
+		if(conference.getEndDate().compareTo(conference.getStartDate()) < 0) {
+			MessageUtils.addErrorMessage("Can't set end date before start date!");
+			return false;
+		}
 		return true;
 	}
 
