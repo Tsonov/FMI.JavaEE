@@ -35,4 +35,22 @@ public class EmployeeHomeBean {
 	public List<LectureModel> getUnapprovedLectures() {
 		return unapprovedLectures;
 	}
+	
+	public void approve(Long lectureId) {
+		LectureModel lectureToModify = lectureDao.findById(lectureId);
+		if(lectureToModify != null) {
+			lectureToModify.setApproved(true);
+			lectureDao.updateLecture(lectureToModify);
+			this.unapprovedLectures.remove(lectureToModify);
+		}
+	}
+	
+	public void refuse(Long lectureId) {
+		LectureModel lectureToModify = lectureDao.findById(lectureId);
+		if(lectureToModify != null) {
+			lectureToModify.setApproved(false);
+			lectureDao.updateLecture(lectureToModify);
+			this.unapprovedLectures.remove(lectureToModify);
+		}
+	}
 }
