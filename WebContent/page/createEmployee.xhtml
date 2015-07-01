@@ -66,8 +66,10 @@
 							<p:inputText id="email"
 								value="#{createEmployeeBean.employee.email}" required="true"
 								styleClass="signupInputFields2">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 								<p:watermark for="email" value="Email" />
-								<f:validateLength maximum="45" />
+								<f:validateLength maximum="100" />
 							</p:inputText>
 						</h:panelGroup>
 						<br clear="all" />
@@ -102,7 +104,8 @@
 								value="#{createEmployeeBean.operationType}" />
 						</p:commandButton>
 						&nbsp;&nbsp;&nbsp;
-						<p:commandButton ajax="false" action="/page/listAllEmployees?faces-redirect=true"
+						<p:commandButton ajax="false"
+							action="/page/listAllEmployees?faces-redirect=true"
 							immediate="true" value="Cancel" styleClass="cancelButton">
 						</p:commandButton>
 					</h:panelGroup>

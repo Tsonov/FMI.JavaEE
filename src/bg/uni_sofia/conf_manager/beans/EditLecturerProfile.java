@@ -70,7 +70,7 @@ public class EditLecturerProfile {
 
 		}
 
-		if (profilePicture != null && profilePicture.getContents() != null && profilePicture.getContents().length != 0) {
+		/*if (profilePicture != null && profilePicture.getContents() != null) {
 			String imageName = profilePicture.getFileName();
 
 			byte[] imageContent = GeneralUtils.resizeProfilePicture(
@@ -95,7 +95,7 @@ public class EditLecturerProfile {
 
 				loggedUser.setProfilePicture(currentImage);
 			}
-		}
+		}*/
 
 		userDao.updateUser(loggedUser);
 

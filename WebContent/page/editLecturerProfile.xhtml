@@ -79,11 +79,11 @@
 						<h:panelGroup layout="block">
 							<p:inputText id="email"
 								value="#{editLecturerProfile.lecturer.email}" required="true"
-								styleClass="signupInputFields2">
+								styleClass="signupInputFields2" validatorMessage="Wrong format!">
 								<f:validateRegex
 									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 								<p:watermark for="email" value="Email" />
-								<f:validateLength maximum="45" />
+								<f:validateLength maximum="100" />
 							</p:inputText>
 						</h:panelGroup>
 						<br clear="all" />

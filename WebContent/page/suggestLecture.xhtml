@@ -28,7 +28,7 @@
 					<div class="loanOuterDiv">
 
 						<h:panelGroup layout="block" styleClass="signupLabels">
-							<p:outputLabel for="title" value="Provide a short title: " />
+							<p:outputLabel for="title" value="Title: " />
 						</h:panelGroup>
 						<h:panelGroup layout="block">
 							<p:inputText id="title"
@@ -43,10 +43,10 @@
 						<br />
 						<h:panelGroup layout="block" styleClass="signupLabels">
 							<p:outputLabel for="synopsis"
-								value="Provide a description for this lecture: " />
+								value="Description: " />
 						</h:panelGroup>
 						<h:panelGroup layout="block">
-							<p:inputTextarea id="synopsis"
+							<p:inputTextarea id="synopsis" styleClass="signupTextArea"
 								value="#{suggestLectureBean.lecture.synopsis}" required="true"
 								rows="50" cols="70">
 								<p:watermark for="synopsis" value="Synopsis" />

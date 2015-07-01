@@ -5,8 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:exp="http://developsoft.custom.component/"
 	template="/page/layout/main.xhtml">
 
@@ -15,90 +15,96 @@
 			<div class="formdiv">
 				<h:form id="conferencesForm">
 					<h2>
-						<h:outputText value="Conferences" escape="false" style="color:#002437;" />
+						<h:outputText value="Conferences" escape="false"
+							style="color:#002437;" />
 					</h2>
-					<br clear="all" />
-					<div class="buttonsUpLayout">
-						<h:panelGroup layout="block" styleClass="create" rendered="#{loginBean.isEmployee()}">
-							<p:commandButton ajax="false" action="/page/createConference.xhtml"
-								immediate="true" value="Add a conference" styleClass="createButton" />
-						</h:panelGroup>
-					</div>
-					
+
 					<br clear="all" />
 					<div class="usersTableStyle">
-							<br clear="all" />
-							<p:dataTable id="conferencesGrid" styleClass="employeeTable" var="conference"
-								value="#{ListAllConferencesBean.allConferences}" 
-								paginator="true" 
-								rowsPerPageTemplate="15,20,25"
-								rows="15" 
-								sortBy="#{conference.startDate}" 
-								sortOrder="ascending"
-								paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								paginatorPosition="bottom" 
-								rowKey="#{conference.id}" 
-								emptyMessage="No records"
-								widgetVar="personsGrid"
-								resizableColumns="true">
-	
+						<br clear="all" />
+						<p:dataTable id="conferencesGrid" styleClass="employeeTable"
+							var="conference" value="#{ListAllConferencesBean.allConferences}"
+							paginator="true" rowsPerPageTemplate="15,20,25" rows="15"
+							sortBy="#{conference.startDate}" sortOrder="ascending"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginatorPosition="bottom" rowKey="#{conference.id}"
+							emptyMessage="No records" widgetVar="conferencesGrid"
+							resizableColumns="true">
+
+							<f:facet name="header">
+								<h:outputText value="Conferences" styleClass="filterLabel" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('conferencesGrid').filter()"
+									styleClass="globalFilter">
+									<p:watermark value="Enter keyword" for="globalFilter" />
+								</p:inputText>
+							</f:facet>
+
+							<p:column sortBy="#{conference.title}"
+								filterBy="#{conference.title}"
+								style="height: 15px; font-size: 10pt;"
+								filterStyleClass="hideFilter" filterMatchMode="contains">
 								<f:facet name="header">
-									<h:outputText value="Conferences" styleClass="filterLabel" />
-									<p:inputText id="globalFilter" onkeyup="PF('conferencesGrid').filter()"
-										styleClass="globalFilter">
-										<p:watermark value="Enter keyword" for="globalFilter" />
-									</p:inputText>
+									<h:outputText value="Title" />
 								</f:facet>
-	
-								<p:column sortBy="#{conference.title}" filterBy="#{conference.title}"
-									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains">
-									<f:facet name="header">
-										<h:outputText value="Title" />
-									</f:facet>
-									<h:outputText value="#{conference.title}" />
-								</p:column>
-	
-								<p:column sortBy="#{conference.venueAddress}" filterBy="#{conference.venueAddress}"
-									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains">
-									<f:facet name="header">
-										<h:outputText value="Location" />
-									</f:facet>
-									<h:outputText value="#{conference.venueAddress}" />
-								</p:column>
-	
-								<p:column sortBy="#{conference.startDate}" filterBy="#{conference.startDate}"
-									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains">
-									<f:facet name="header">
-										<h:outputText value="Starts" />
-									</f:facet>
-									<h:outputText value="#{conference.startDate}" />
-								</p:column>
-								<p:column sortBy="#{conference.endDate}" filterBy="#{conference.endDate}"
-									style="height: 15px; font-size: 10pt;" filterStyleClass="hideFilter"
-									filterMatchMode="contains">
-									<f:facet name="header">
-										<h:outputText value="Ends" />
-									</f:facet>
-									<h:outputText value="#{conference.endDate}" />
-								</p:column>
-								
-								<p:column style="height: 15px; font-size: 10pt;" exportable="false" styleClass="colType">
-									<f:facet name="header">
-										<h:outputText value="Actions" />
-									</f:facet>
-									
-									<p:commandLink ajax="false" process="@this" immediate="true"  value="Details"
-									action="conferenceDetails.xhtml" id="editButton" rendered="#{loginBean.isLecturer()}">
-										<f:param name="conferenceId" value="#{conference.id}"></f:param>
-									
+								<h:outputText value="#{conference.title}" />
+							</p:column>
+
+							<p:column sortBy="#{conference.venueAddress}"
+								filterBy="#{conference.venueAddress}"
+								style="height: 15px; font-size: 10pt;"
+								filterStyleClass="hideFilter" filterMatchMode="contains">
+								<f:facet name="header">
+									<h:outputText value="Location" />
+								</f:facet>
+								<h:outputText value="#{conference.venueAddress}" />
+							</p:column>
+
+							<p:column sortBy="#{conference.startDate}"
+								filterBy="#{conference.startDate}"
+								style="height: 15px; font-size: 10pt;"
+								filterStyleClass="hideFilter" filterMatchMode="contains">
+								<f:facet name="header">
+									<h:outputText value="Starts" />
+								</f:facet>
+								<h:outputText value="#{conference.startDate}" />
+							</p:column>
+							<p:column sortBy="#{conference.endDate}"
+								filterBy="#{conference.endDate}"
+								style="height: 15px; font-size: 10pt;"
+								filterStyleClass="hideFilter" filterMatchMode="contains">
+								<f:facet name="header">
+									<h:outputText value="Ends" />
+								</f:facet>
+								<h:outputText value="#{conference.endDate}" />
+							</p:column>
+
+							<p:column style="height: 15px; font-size: 10pt;"
+								exportable="false" styleClass="colType">
+								<f:facet name="header">
+									<h:outputText value="Actions" />
+								</f:facet>
+
+								<p:commandLink ajax="false" process="@this" immediate="true"
+									action="conferenceDetails.xhtml" id="editButton">
+									<f:param name="conferenceId" value="#{conference.id}"></f:param>
+									<h:graphicImage value="/img/details.png" title="Details"
+										alt="Details" width="20px" height="20px" />
 								</p:commandLink>
-								</p:column>
-							</p:dataTable>
+							</p:column>
+						</p:dataTable>
+
+						<br clear="all" />
+						<div class="buttonsUpLayout">
+							<h:panelGroup layout="block" styleClass="create"
+								rendered="#{loginBean.isEmployee()}">
+								<p:commandButton ajax="false"
+									action="/page/createConference.xhtml" immediate="true"
+									value="Add a conference" styleClass="createButton" />
+							</h:panelGroup>
 						</div>
-					</h:form>
+					</div>
+				</h:form>
 			</div>
 
 		</div>

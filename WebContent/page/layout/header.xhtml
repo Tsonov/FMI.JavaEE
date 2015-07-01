@@ -36,14 +36,16 @@
 						</ui:fragment>
 						<ui:fragment rendered="#{loginBean.isEmployee()}">
 							<li><a
-								href='#{application.contextPath}/page/employeeHome.xhtml'>Dashboard</a></li>
-							<li><a
 								href='#{application.contextPath}/page/viewEmployeeProfile.xhtml'>My
 									profile</a></li>
+							<li><a
+								href='#{application.contextPath}/page/employeeHome.xhtml'>Dashboard</a></li>
 							<li><a
 								href='#{application.contextPath}/page/listAllConferences.xhtml'>Conferences</a></li>
 						</ui:fragment>
 						<ui:fragment rendered="#{loginBean.isLecturer()}">
+							<li><a
+								href='#{application.contextPath}/page/listAllConferences.xhtml'>Conferences</a></li>
 							<li><a
 								href='#{application.contextPath}/page/viewLecturerProfile.xhtml'>My
 									profile</a></li>

@@ -135,7 +135,10 @@ public class CreateEmployeeBean implements Serializable {
 			String encryptedPassword = GeneralUtils
 					.encodeSha256Password(plainPassword);
 			employee.setPassword(encryptedPassword);
-			employeeDao.updateEmployee(employee);
+			loggedUser.setEmployee(employee);
+			loggedUser.setPassword(employee.getPassword());
+			
+			userDao.updateUser(loggedUser);
 			return getSuccessRedirect();
 		}
 	}
