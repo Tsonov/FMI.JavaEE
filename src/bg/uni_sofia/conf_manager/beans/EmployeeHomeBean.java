@@ -1,6 +1,7 @@
 package bg.uni_sofia.conf_manager.beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -40,6 +41,7 @@ public class EmployeeHomeBean {
 		LectureModel lectureToModify = lectureDao.findById(lectureId);
 		if(lectureToModify != null) {
 			lectureToModify.setApproved(true);
+			lectureToModify.setApprovedDate(new Date());
 			lectureDao.updateLecture(lectureToModify);
 			this.unapprovedLectures.remove(lectureToModify);
 		}

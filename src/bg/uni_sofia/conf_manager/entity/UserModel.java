@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -42,8 +41,6 @@ public class UserModel implements Serializable {
 	private AdminModel admin;
 	private LecturerModel lecturer;
 	private EmployeeModel employee;
-
-	private FileModel profilePicture;
 
 	private UserType type;
 
@@ -105,16 +102,6 @@ public class UserModel implements Serializable {
 
 	public void setEmployee(EmployeeModel employee) {
 		this.employee = employee;
-	}
-
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "profile_picture_id", nullable = true)
-	public FileModel getProfilePicture() {
-		return profilePicture;
-	}
-
-	public void setProfilePicture(FileModel profilePicture) {
-		this.profilePicture = profilePicture;
 	}
 
 	@Enumerated(EnumType.STRING)

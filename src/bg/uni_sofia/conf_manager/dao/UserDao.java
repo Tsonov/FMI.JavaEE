@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import bg.uni_sofia.conf_manager.entity.FileModel;
 import bg.uni_sofia.conf_manager.entity.UserModel;
 
 @Singleton
@@ -54,28 +51,4 @@ public class UserDao {
 			return null;
 		}
 	}
-	
-	public FileModel getFile(Long fileId) {
-		Query q = em.createQuery("select model from FileModel model where model.id = :pid");
-		q.setParameter("pid", fileId);
-		
-		try {
-			return (FileModel) q.getSingleResult();
-		} catch(NoResultException nre) {
-			return null;
-		}
-	}
-	
-	public void saveFile(FileModel file) {
-		em.persist(file);
-	}
-	
-	public void updateFile(FileModel file) {
-		em.merge(file);
-	}
-	
-	public void removeFile(FileModel file) {
-		em.remove(file);
-	}
-
 }

@@ -87,9 +87,9 @@ public class CreateEmployeeBean implements Serializable {
 	protected String getSuccessRedirect() {
 
 		if (operationType.equals("UPDATE")) {
-			MessageUtils.addFlashMessage("Employee is updated successfully!");
+			MessageUtils.addSuccessMessage("Employee is updated successfully!");
 		} else if (operationType.equals("CREATE")) {
-			MessageUtils.addFlashMessage("Employee is created successfully!");
+			MessageUtils.addSuccessMessage("Employee is created successfully!");
 		}
 
 		String returnUrl = "";

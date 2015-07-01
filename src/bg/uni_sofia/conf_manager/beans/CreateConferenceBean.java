@@ -71,9 +71,9 @@ public class CreateConferenceBean implements Serializable {
 	protected String getSuccessRedirect() {
 
 		if (operationType.equals("UPDATE")) {
-			MessageUtils.addFlashMessage("Conference is updated successfully!");
+			MessageUtils.addSuccessMessage("Conference is updated successfully!");
 		} else if (operationType.equals("CREATE")) {
-			MessageUtils.addFlashMessage("Conference is created successfully!");
+			MessageUtils.addSuccessMessage("Conference is created successfully!");
 		}
 
 		return "/page/listAllConferences?faces-redirect=true";

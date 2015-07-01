@@ -21,27 +21,6 @@
 				<br clear="all" />
 
 				<h:form id="signupForm" enctype="multipart/form-data">
-					<h:inputHidden value="#{editLecturerProfile.lecturer.id}" id="id" />
-					<div class="span-2" style="margin-top: 60px; text-align: center;">
-						<h:graphicImage styleClass="takePhotoPicture"
-							value="/img/icon_takephoto.png" border="0"
-							rendered="#{editLecturerProfile.loggedUser.profilePicture == null}" />
-						<h:graphicImage
-							value="/image.jpg?id=#{editLecturerProfile.loggedUser.profilePicture.id}&amp;type=users"
-							styleClass="avatar takePhotoPicture"
-							style="width: 48px; height: 48px;"
-							rendered="#{editLecturerProfile.loggedUser.profilePicture != null}" />
-						<div id="takePhotoDiv" style="display: none;">
-							<p:fileUpload id="logo"
-								value="#{editLecturerProfile.profilePicture}" mode="simple"
-								styleClass="span-3 fileUpload takePhotoButton"
-								allowTypes="/(\.|\/)(gif|jpe?g|png|bmp)$/" sizeLimit="10485760"
-								description="Select Image" />
-						</div>
-						<br /> <br /> <a href="javascript: void(0)" id="takePhotoLink"
-							onclick="showUploadButton();"
-							style="color: #0066cc; font-size: 14px;">Upload</a>
-					</div>
 					<div class="loanLeft">
 						<h:panelGroup layout="block" styleClass="signupLabels">
 							<p:outputLabel for="username" value="Username: " />

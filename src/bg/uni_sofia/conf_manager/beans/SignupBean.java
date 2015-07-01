@@ -1,6 +1,8 @@
 package bg.uni_sofia.conf_manager.beans;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -88,8 +90,14 @@ public class SignupBean implements Serializable {
 		user.setLecturer(lecturer);
 		user.setUsername(lecturer.getUsername());
 		user.setPassword(lecturer.getPassword());
+		
+		Set<String> permissions = new HashSet<String>();
+		permissions.add("PERMISSIONS_LECTURER");
+		user.setPermissions(permissions);
 
 		userDAO.addUser(user);
+		
+		
 
 		req.getSession().setAttribute("_loggedUser", user);
 

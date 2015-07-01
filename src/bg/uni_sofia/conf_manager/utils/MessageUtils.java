@@ -13,14 +13,6 @@ public class MessageUtils {
 	public static void addMessage(String clientId, FacesMessage msg) {
 		FacesContext.getCurrentInstance().addMessage(clientId, msg);
 	}
-
-	public static void addFlashMessage(String aMsgId) {
-		String message = getMessage(aMsgId);
-		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		if(flash != null) {
-			flash.put("flashMessage", message);
-		}
-	}
 	
 	public static void addMessage(String aMsgId) {
 		addMessage(null, new FacesMessage(getMessage(aMsgId)));
