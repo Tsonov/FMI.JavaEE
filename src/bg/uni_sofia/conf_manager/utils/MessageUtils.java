@@ -2,7 +2,6 @@ package bg.uni_sofia.conf_manager.utils;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 
 public class MessageUtils {
 

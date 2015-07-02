@@ -1,7 +1,6 @@
 package bg.uni_sofia.conf_manager.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
